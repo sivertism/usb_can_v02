@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=usb_can_v02.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\usb_can_v02 -TC:\CooCox\CoIDE\configuration\ProgramData\usb_can_v02/arm-gcc-link.ld -g">
+      <target file="usb_can_v02.elf" lastModified="152ac90358d">
+         <source file="..\obj\UART_metoder.o" lastModified="152ac9029e1"/>
+         <source file="..\obj\stm32f30x_rcc.o" lastModified="152ac902a59"/>
+         <source file="..\obj\stm32f3_discovery_lsm303dlhc.o" lastModified="152ac902ac1"/>
+         <source file="..\obj\stm32f30x_adc.o" lastModified="152ac902b6f"/>
+         <source file="..\obj\stm32f30x_gpio.o" lastModified="152ac902bca"/>
+         <source file="..\obj\GPIO_metoder.o" lastModified="152ac902c21"/>
+         <source file="..\obj\main.o" lastModified="152ac902c64"/>
+         <source file="..\obj\stm32f30x_dma.o" lastModified="152ac902cbd"/>
+         <source file="..\obj\init.o" lastModified="152ac902ceb"/>
+         <source file="..\obj\can_metoder.o" lastModified="152ac902d4a"/>
+         <source file="..\obj\stm32f30x_exti.o" lastModified="152ac902d9e"/>
+         <source file="..\obj\stm32f30x_spi.o" lastModified="152ac902e14"/>
+         <source file="..\obj\stm32f30x_i2c.o" lastModified="152ac902e90"/>
+         <source file="..\obj\akselerometer_metoder.o" lastModified="152ac902ed9"/>
+         <source file="..\obj\system_stm32f30x_temp.o" lastModified="152ac902f1f"/>
+         <source file="..\obj\stm32f30x_misc.o" lastModified="152ac902f68"/>
+         <source file="..\obj\stm32f30x_tim.o" lastModified="152ac903061"/>
+         <source file="..\obj\stm32f3_discovery_l3gd20.o" lastModified="152ac9030be"/>
+         <source file="..\obj\startup_stm32f30x.o" lastModified="152ac9030e2"/>
+         <source file="..\obj\stm32f30x_syscfg.o" lastModified="152ac90313c"/>
+         <source file="..\obj\SysTick_metoder.o" lastModified="152ac90318b"/>
+         <source file="..\obj\stm32f30x_can.o" lastModified="152ac90320f"/>
+         <source file="..\obj\stm32f3_discovery.o" lastModified="152ac90325f"/>
+         <source file="..\obj\TIM_metoder.o" lastModified="152ac9032ae"/>
+         <source file="..\obj\ADC_metoder.o" lastModified="152ac903312"/>
+         <source file="..\obj\stm32f30x_usart.o" lastModified="152ac90339c"/>
+      </target>
+   </processor>
+</history>

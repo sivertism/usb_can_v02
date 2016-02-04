@@ -96,6 +96,7 @@
     <File name="cmsis_boot/startup/startup_stm32f30x.S" path="cmsis_boot/startup/startup_stm32f30x.S" type="1"/>
     <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
+    <File name="cmsis_lib/include/stm32f30x_dma.h" path="cmsis_lib/include/stm32f30x_dma.h" type="1"/>
     <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_misc.c" path="cmsis_lib/source/stm32f30x_misc.c" type="1"/>
     <File name="stm32f3_discovery" path="" type="2"/>
@@ -124,12 +125,13 @@
     <File name="cmsis_lib/source/stm32f30x_i2c.c" path="cmsis_lib/source/stm32f30x_i2c.c" type="1"/>
     <File name="inc/can_metoder.h" path="inc/can_metoder.h" type="1"/>
     <File name="src/TIM_metoder.c" path="src/TIM_metoder.c" type="1"/>
+    <File name="cmsis_lib/source/stm32f30x_dma.c" path="cmsis_lib/source/stm32f30x_dma.c" type="1"/>
     <File name="cmsis_lib/include/stm32f30x_syscfg.h" path="cmsis_lib/include/stm32f30x_syscfg.h" type="1"/>
     <File name="inc" path="" type="2"/>
     <File name="stm32f3_discovery/stm32f3_discovery.h" path="stm32f3_discovery/stm32f3_discovery.h" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_tim.c" path="cmsis_lib/source/stm32f30x_tim.c" type="1"/>
-    <File name="cmsis_lib/include/stm32f30x_spi.h" path="cmsis_lib/include/stm32f30x_spi.h" type="1"/>
     <File name="inc/TIM_metoder.h" path="inc/TIM_metoder.h" type="1"/>
+    <File name="cmsis_lib/include/stm32f30x_spi.h" path="cmsis_lib/include/stm32f30x_spi.h" type="1"/>
     <File name="cmsis" path="" type="2"/>
     <File name="cmsis_lib/source/stm32f30x_gpio.c" path="cmsis_lib/source/stm32f30x_gpio.c" type="1"/>
     <File name="inc/akselerometer_metoder.h" path="inc/akselerometer_metoder.h" type="1"/>

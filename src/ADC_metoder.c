@@ -26,11 +26,31 @@
 void ADC_init(void);
 void ADC1_2_IRQHandler(void);
 void ADC4_IRQHandler(void);
+void DMA1_Channel1_IRQHandler(void);
 uint8_t ADC_getValues(void);
 uint16_t ADC1_getChannel(uint8_t channel);
 uint16_t ADC4_getChannel(uint8_t channel);
 
 /* Function definitions ----------------------------------------------------------------*/
+
+/**
+ * @brief  	A interrupt request is generated when DMA_Channel1 is finished saving 4
+ * 			new ADC-values to memory.
+ * @param  	None
+ * @retval 	None
+ */
+
+void DMA1_Channel1_IRQHandler(){
+
+	/* Indicate that this method is running by blinking an LED */
+	GPIOE->ODR ^= STATUS_LED6 << 8;
+
+	/* Indicate to SysTick that a new set of data is ready */
+	new_values |= 0x0F;
+
+	DMA_ClearFlag(DMA1_FLAG_TC1);
+	DMA_ClearITPendingBit(DMA1_IT_TC1);
+}
 
 /**
  * @brief  	A interrupt request is generated when ADC1 is done converting a sample.
@@ -170,14 +190,14 @@ void ADC_init(void){
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_InitStruct.NVIC_IRQChannel = ADC1_2_IRQn;
+//	NVIC_InitStruct.NVIC_IRQChannel = ADC1_2_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 	NVIC_InitStruct.NVIC_IRQChannel = ADC4_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
 	/* Interrupt request settings */
-	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
-	ADC_ITConfig(ADC1, ADC_IT_EOS, ENABLE);
+//	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+//	ADC_ITConfig(ADC1, ADC_IT_EOS, ENABLE);
 	ADC_ITConfig(ADC4, ADC_IT_EOC, ENABLE);
 
 	/* ADC Channal sequencing ***********************************************************/
@@ -200,7 +220,7 @@ void ADC_init(void){
 	DMA_InitTypeDef DMA_InitStructure;
 	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1->DR;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-	DMA_InitStructure.DMA_MemoryBaseAddr = &ADC1_buffer[0];
+	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADC1_buffer[0];
 	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
 	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
@@ -211,15 +231,17 @@ void ADC_init(void){
 	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
 
 	/* Enable DMA interrup handler */
-	NVIC_InitTypeDef NVIC_InitStruct;
+//	NVIC_InitTypeDef NVIC_InitStruct;
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel1_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
-	DMA_ITConfig(DMA1_Channel1, DMA_IT_TC);
+	DMA_ITConfig(DMA1_Channel1, DMA_IT_TC,ENABLE);
+	DMA_Cmd(DMA1_Channel1, ENABLE);
 
+	ADC_DMACmd(ADC1, ENABLE);
 
 	/* Start first conversion ***********************************************************/
 	ADC_StartConversion(ADC1);
