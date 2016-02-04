@@ -16,6 +16,7 @@
 #include "stm32f30x_misc.h"
 #include "math.h"
 #include "ADC_metoder.h"
+#include "stm32f30x_dma.h"
 
 /* Global variables --------------------------------------------------------------------*/
 #include "extern_decl_global_vars.h"
@@ -101,6 +102,7 @@ void ADC_init(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_ADC34, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
 	/* GPIO setup ***********************************************************************/
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
@@ -183,8 +185,10 @@ void ADC_init(void){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_601Cycles5);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_601Cycles5);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 4, ADC_SampleTime_601Cycles5);
-
 	ADC_RegularChannelConfig(ADC4, ADC_Channel_3, 1, ADC_SampleTime_19Cycles5);
+
+	/* DMA Controller setup *************************************************************/
+	DMA1->DMA_CN
 
 	/* Activaton ************************************************************************/
 	ADC_Cmd(ADC1, ENABLE);
