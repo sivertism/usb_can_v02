@@ -167,8 +167,8 @@ void ADC_init(void){
 
 	/* Interrupt handler settings */
 	NVIC_InitTypeDef NVIC_InitStruct;
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0; // Will not preempt SysTick
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0; // Lower prio than SysTick
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannel = ADC1_2_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
@@ -187,8 +187,6 @@ void ADC_init(void){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 4, ADC_SampleTime_601Cycles5);
 	ADC_RegularChannelConfig(ADC4, ADC_Channel_3, 1, ADC_SampleTime_19Cycles5);
 
-	/* DMA Controller setup *************************************************************/
-	DMA1->DMA_CN
 
 	/* Activaton ************************************************************************/
 	ADC_Cmd(ADC1, ENABLE);
@@ -198,7 +196,32 @@ void ADC_init(void){
 	while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_RDY));
 	while(!ADC_GetFlagStatus(ADC4, ADC_FLAG_RDY));
 
-	/* Start first conversion */
+	/* DMA Controller setup *************************************************************/
+	DMA_InitTypeDef DMA_InitStructure;
+	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1->DR;
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+	DMA_InitStructure.DMA_MemoryBaseAddr = &ADC1_buffer[0];
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
+	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+
+	/* Enable DMA interrup handler */
+	NVIC_InitTypeDef NVIC_InitStruct;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel1_IRQn;
+	NVIC_Init(&NVIC_InitStruct);
+
+	DMA_ITConfig(DMA1_Channel1, DMA_IT_TC);
+
+
+	/* Start first conversion ***********************************************************/
 	ADC_StartConversion(ADC1);
 	ADC_StartConversion(ADC4);
 } // end ADC_oppstart()
