@@ -85,12 +85,20 @@ void SysTick_Handler(void){
 		GPIOE->ODR ^= (1u << CAN_getByteFromMessage(2,0)) << 8;
 	} // end if
 
-	if ( DMA_GetFlagStatus(DMA1_FLAG_GL1)){
-		GPIOE->ODR ^= 1u << 10 ;
-		DMA_ClearFlag(DMA1_FLAG_GL1);
-	}
+
 
 	if(teller>100){
+		if ( DMA_GetFlagStatus(DMA1_FLAG_TE1)){
+			GPIOE->ODR ^= 1u << 10 ;
+			DMA_ClearFlag(DMA1_FLAG_TE1);
+		}
+
+		//ADC_StartConversion(ADC1);
+
+		if ((ADC1->ISR & ADC_ISR_OVR) > 0){
+			GPIOE->ODR^= 1u << 11 ;
+			ADC1->ISR &= ADC_ISR_OVR;
+		}
 
 		GPIOE->ODR ^= SYSTICK_LED << 8;
 
