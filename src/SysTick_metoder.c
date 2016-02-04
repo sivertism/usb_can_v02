@@ -30,7 +30,7 @@
 #include "stm32f30x.h"
 #include "stm32f30x_gpio.h"
 #include "core_cm4.h"
-
+#include "stm32f30x_dma.h"
 /* Global variables -------------------------------------------------------------------*/
 #include "extern_decl_global_vars.h"
 
@@ -85,13 +85,18 @@ void SysTick_Handler(void){
 		GPIOE->ODR ^= (1u << CAN_getByteFromMessage(2,0)) << 8;
 	} // end if
 
+	if ( DMA_GetFlagStatus(DMA1_FLAG_GL1)){
+		GPIOE->ODR ^= 1u << 10 ;
+		DMA_ClearFlag(DMA1_FLAG_GL1);
+	}
+
 	if(teller>100){
 
 		GPIOE->ODR ^= SYSTICK_LED << 8;
 
 //		accelerometer_readValue();
 
-		CAN_transmit_AN_RAW();
+//		CAN_transmit_AN_RAW();
 //		CAN_transmitByte(0x301, 7);
 
 		teller = 0;

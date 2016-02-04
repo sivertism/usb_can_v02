@@ -18,6 +18,7 @@
 #include "ADC_metoder.h"
 #include "stm32f30x_dma.h"
 
+
 /* Global variables --------------------------------------------------------------------*/
 #include "extern_decl_global_vars.h"
 
@@ -41,14 +42,12 @@ uint16_t ADC4_getChannel(uint8_t channel);
  */
 
 void DMA1_Channel1_IRQHandler(){
-
 	/* Indicate that this method is running by blinking an LED */
 	GPIOE->ODR ^= STATUS_LED6 << 8;
+	USART_transmit(ADC1_buffer[0] & 0x00FF);
 
 	/* Indicate to SysTick that a new set of data is ready */
 	new_values |= 0x0F;
-
-	DMA_ClearFlag(DMA1_FLAG_TC1);
 	DMA_ClearITPendingBit(DMA1_IT_TC1);
 }
 
@@ -157,7 +156,7 @@ void ADC_init(void){
 	ADC_CommonInitStructure.ADC_Clock = ADC_Clock_AsynClkMode;
 	// ADC_CommonInitStructure.ADC_Clock = ADC_Clock_SynClkModeDiv2;
 	ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;
-	ADC_CommonInitStructure.ADC_DMAMode = ADC_DMAMode_OneShot;
+	ADC_CommonInitStructure.ADC_DMAMode = ADC_DMAMode_Circular;
 	ADC_CommonInitStructure.ADC_TwoSamplingDelay = 100;
 	ADC_CommonInit(ADC4, &ADC_CommonInitStructure);
 	ADC_CommonInit(ADC1, &ADC_CommonInitStructure);
@@ -201,11 +200,11 @@ void ADC_init(void){
 	ADC_ITConfig(ADC4, ADC_IT_EOC, ENABLE);
 
 	/* ADC Channal sequencing ***********************************************************/
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_601Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_601Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_601Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 4, ADC_SampleTime_601Cycles5);
-	ADC_RegularChannelConfig(ADC4, ADC_Channel_3, 1, ADC_SampleTime_19Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 4, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC4, ADC_Channel_3, 1, ADC_SampleTime_61Cycles5);
 
 
 	/* Activaton ************************************************************************/
@@ -216,19 +215,47 @@ void ADC_init(void){
 	while(!ADC_GetFlagStatus(ADC1, ADC_FLAG_RDY));
 	while(!ADC_GetFlagStatus(ADC4, ADC_FLAG_RDY));
 
+
+
 	/* DMA Controller setup *************************************************************/
-	DMA_InitTypeDef DMA_InitStructure;
-	DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1->DR;
-	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADC1_buffer[0];
-	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
-	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
-	DMA_InitStructure.DMA_Priority = DMA_Priority_Medium;
-	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+//	DMA_InitTypeDef DMA_InitStructure;
+//	DMA_DeInit(DMA1_Channel1);
+//	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+//	DMA_InitStructure.DMA_PeripheralBaseAddr = ((uint32_t)&(ADC1->DR));
+//	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+//	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+//	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADC1_buffer[0];
+//	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+//	DMA_InitStructure.DMA_BufferSize = 4;
+//	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+//	DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+//	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+//	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
+//	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
+//	DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
+//	DMA_Cmd(DMA1_Channel1, ENABLE);
+
+	DMA_DeInit(DMA1_Channel1);
+	DMA1_Channel1->CPAR = ((uint32_t)&(ADC1->DR)); // Source register (periph)
+	DMA1_Channel1->CMAR = (uint32_t)&ADC1_buffer[0]; // Destination register (memory)
+	DMA1_Channel1->CNDTR = 4; // The number of data to be transfered
+
+	/* Configure data transfer direction, circular mode, peripheral & memory incremented
+	*	mode, peripheral & memory data size, and interrupt after half and/or full transfer in the
+	*	DMA_CCRx register.
+	*/
+
+//	DMA1_Channel1->CCR = 	(DMA_CCR_PL_1) // Prio 0
+//						|	(DMA_CCR_CIRC)
+//						|	(DMA_CCR_MINC)
+//						|	(DMA_CCR_PSIZE_0)
+//						|	(DMA_CCR_MSIZE_0)
+//						|	(DMA_CCR_TCIE)
+//						;
+	DMA1_Channel1->CCR |= 0b010010110100010;
+
+	/* Activating the DMA channel */
+	DMA1_Channel1->CCR |= DMA_CCR_EN;
 
 	/* Enable DMA interrup handler */
 //	NVIC_InitTypeDef NVIC_InitStruct;
@@ -238,10 +265,10 @@ void ADC_init(void){
 	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel1_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
-	DMA_ITConfig(DMA1_Channel1, DMA_IT_TC,ENABLE);
-	DMA_Cmd(DMA1_Channel1, ENABLE);
-
 	ADC_DMACmd(ADC1, ENABLE);
+
+
+
 
 	/* Start first conversion ***********************************************************/
 	ADC_StartConversion(ADC1);
