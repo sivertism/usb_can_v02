@@ -16,25 +16,35 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="ADC_metoder.c" partName="ADC_metoder.c" path="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/ADC_metoder.c" title="ADC_metoder.c" tooltip="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/ADC_metoder.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="ADC_metoder.c" partName="ADC_metoder.c" path="C:/Users/siver/Documents/usb_can_v02/src/ADC_metoder.c" title="ADC_metoder.c" tooltip="C:/Users/siver/Documents/usb_can_v02/src/ADC_metoder.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/src/ADC_metoder.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="3" selectionOffset="9108" selectionTopPixel="3383"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3939" selectionTopPixel="1675"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="can_metoder.c" partName="can_metoder.c" path="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/can_metoder.c" title="can_metoder.c" tooltip="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/can_metoder.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/src/can_metoder.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1843" selectionTopPixel="604"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="TIM_metoder.c" partName="TIM_metoder.c" path="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/TIM_metoder.c" title="TIM_metoder.c" tooltip="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/TIM_metoder.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/src/TIM_metoder.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3019" selectionTopPixel="1250"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="SysTick_metoder.c" partName="SysTick_metoder.c" path="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/SysTick_metoder.c" title="SysTick_metoder.c" tooltip="C:/Users/Stian/Google Drive/#Bachelor Sensornode/Kode/usb_can_v02/src/SysTick_metoder.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="SysTick_metoder.c" partName="SysTick_metoder.c" path="C:/Users/siver/Documents/usb_can_v02/src/SysTick_metoder.c" title="SysTick_metoder.c" tooltip="C:/Users/siver/Documents/usb_can_v02/src/SysTick_metoder.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/src/SysTick_metoder.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3105" selectionTopPixel="1282"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3012" selectionTopPixel="757"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="def_global_vars.h" partName="def_global_vars.h" path="C:/Users/siver/Documents/usb_can_v02/inc/def_global_vars.h" title="def_global_vars.h" tooltip="C:/Users/siver/Documents/usb_can_v02/inc/def_global_vars.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/inc/def_global_vars.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="418" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="TIM_metoder.c" partName="TIM_metoder.c" path="C:/Users/siver/Documents/usb_can_v02/src/TIM_metoder.c" title="TIM_metoder.c" tooltip="C:/Users/siver/Documents/usb_can_v02/src/TIM_metoder.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/src/TIM_metoder.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2732" selectionTopPixel="255"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="ADC_metoder.h" partName="ADC_metoder.h" path="C:/Users/siver/Documents/usb_can_v02/inc/ADC_metoder.h" title="ADC_metoder.h" tooltip="C:/Users/siver/Documents/usb_can_v02/inc/ADC_metoder.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/inc/ADC_metoder.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="658" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f30x_adc.h" partName="stm32f30x_adc.h" path="C:/Users/siver/Documents/usb_can_v02/cmsis_lib/include/stm32f30x_adc.h" title="stm32f30x_adc.h" tooltip="C:/Users/siver/Documents/usb_can_v02/cmsis_lib/include/stm32f30x_adc.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/usb_can_v02/cmsis_lib/include/stm32f30x_adc.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="17" selectionOffset="5838" selectionTopPixel="646"/>
 </editor>
 </editors>
 <views>
@@ -42,10 +52,14 @@
 <viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="1" verticalPosition="0">
 <expanded>
 <element path="/usb_can_v02"/>
+<element path="/usb_can_v02/cmsis"/>
+<element path="/usb_can_v02/cmsis_boot"/>
+<element path="/usb_can_v02/cmsis_boot/startup"/>
+<element path="/usb_can_v02/inc"/>
 <element path="/usb_can_v02/src"/>
 </expanded>
 <selection>
-<element path="/usb_can_v02/src/GPIO_metoder.c"/>
+<element path="/usb_can_v02/src/TIM_metoder.c"/>
 </selection>
 </viewState>
 </view>
@@ -95,8 +109,8 @@
 <hide_toolbar_item_id id="org.eclipse.cdt.debug.internal.ui.actions.ToggleInstructionStepModeAction"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
-<view id="org.coocox.component.ui.ComponentView"/>
 <view id="org.coocox.builder.ui.views.ProjectView"/>
+<view id="org.coocox.component.ui.ComponentView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <fastViewBars/>
 <layout>
@@ -117,7 +131,7 @@
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1c27af4" ratio="0.7507987" ratioLeft="470" ratioRight="156" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1ac1460">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@1c27af4" ratio="0.8550107" ratioLeft="802" ratioRight="136" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1ac1460">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
@@ -125,7 +139,7 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@b3c57f" ratio="0.16974169" ratioLeft="230" ratioRight="1125" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1ac1460">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@b3c57f" ratio="0.36402386" ratioLeft="427" ratioRight="746" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1ac1460">
 <folder appearance="2" expanded="2">
 <page content="org.coocox.builder.ui.exampleView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
@@ -138,6 +152,7 @@
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.coocox.coassistant.view.CoAssistantView" label="LabelNotFound"/>
 <page content="org.coocox.builder.ui.MoreExampleView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.console.ConsoleView:Console View #1" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
@@ -239,162 +254,161 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/src/ADC_metoder.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/src/can_metoder.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/src/TIM_metoder.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/src/SysTick_metoder.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/cmsis_lib/source/stm32f30x_adc.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/src/TIM_metoder.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/inc/ADC_metoder.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/cmsis_lib/include/stm32f30x_adc.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/src/GPIO_metoder.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/usb_can_v02/cmsis_lib/source/stm32f30x_adc.c"/>
 </editors>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="7471" y="0"/>
-</item>
-<item historyLabel="TIM_metoder.c" index="2">
-<position info="not_deleted" x="3263" y="0"/>
-</item>
-<item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="1738" y="0"/>
-</item>
-<item historyLabel="TIM_metoder.c" index="2">
-<position info="not_deleted" x="3263" y="0"/>
-</item>
-<item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="6737" y="0"/>
-</item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="2021" y="0"/>
-</item>
-<item historyLabel="can_metoder.c" index="1">
-<position info="not_deleted" x="136" y="0"/>
-</item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="3090" y="0"/>
-</item>
-<item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="8201" y="0"/>
-</item>
-<item historyLabel="can_metoder.c" index="1">
-<position info="not_deleted" x="1843" y="0"/>
-</item>
-<item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="7827" y="0"/>
-</item>
-<item historyLabel="stm32f30x_adc.c" index="4">
 <position/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="7823" y="0"/>
-</item>
-<item historyLabel="stm32f30x_adc.c" index="4">
-<position/>
-</item>
-<item historyLabel="can_metoder.c" index="1">
-<position info="not_deleted" x="1843" y="0"/>
+<position info="not_deleted" x="2013" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="7823" y="0"/>
-</item>
-<item historyLabel="stm32f30x_adc.c" index="4">
-<position/>
+<position info="not_deleted" x="9354" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="8517" y="0"/>
-</item>
-<item historyLabel="stm32f30x_adc.c" index="4">
-<position/>
+<position info="not_deleted" x="1672" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="7612" y="0"/>
-</item>
-<item historyLabel="stm32f30x_adc.h" index="5">
-<position info="not_deleted" x="34842" y="0"/>
-</item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="3090" y="0"/>
+<position info="not_deleted" x="10647" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position/>
+<position info="not_deleted" x="10246" y="0"/>
 </item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="3090" y="0"/>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10257" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10647" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10322" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10338" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10655" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10978" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10733" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10942" y="0"/>
 </item>
 <item historyLabel="TIM_metoder.c" index="2">
-<position info="not_deleted" x="3019" y="0"/>
-</item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="3090" y="0"/>
+<position info="not_deleted" x="3388" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position/>
+<position info="not_deleted" x="10942" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="1595" y="0"/>
+<position info="not_deleted" x="1742" y="0"/>
 </item>
-<item historyLabel="stm32f30x_adc.c" index="4">
-<position info="not_deleted" x="53956" y="22"/>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3120" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="2064" y="0"/>
+<position info="not_deleted" x="1576" y="0"/>
 </item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="3090" y="0"/>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3120" y="0"/>
+</item>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3283" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="1576" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="2626" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="2613" y="0"/>
+</item>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3283" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="2613" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="6973" y="0"/>
+</item>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3293" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="6973" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="10338" y="0"/>
+</item>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3293" y="0"/>
+</item>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3210" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="1983" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.h" index="3">
+<position info="not_deleted" x="658" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="1983" y="0"/>
+</item>
+<item historyLabel="ADC_metoder.c" index="0">
+<position info="not_deleted" x="7503" y="0"/>
 </item>
 <item historyLabel="TIM_metoder.c" index="2">
-<position info="not_deleted" x="3019" y="0"/>
+<position info="not_deleted" x="3262" y="0"/>
 </item>
-<item historyLabel="can_metoder.c" index="1">
-<position info="not_deleted" x="1843" y="0"/>
-</item>
-<item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="8121" y="0"/>
-</item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="3105" y="0"/>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3257" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="8121" y="0"/>
+<position info="not_deleted" x="8054" y="0"/>
 </item>
 <item historyLabel="TIM_metoder.c" index="2">
-<position info="not_deleted" x="3019" y="0"/>
+<position info="not_deleted" x="2732" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="6736" y="0"/>
+<position info="not_deleted" x="4258" y="0"/>
 </item>
-<item historyLabel="GPIO_metoder.c" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="TIM_metoder.c" index="2">
-<position info="not_deleted" x="3019" y="0"/>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3370" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="8121" y="0"/>
+<position info="not_deleted" x="6273" y="0"/>
 </item>
-<item historyLabel="GPIO_metoder.c" index="6">
-<position info="not_deleted" x="1471" y="0"/>
+<item historyLabel="stm32f30x_adc.h" index="4">
+<position info="not_deleted" x="5838" y="17"/>
 </item>
-<item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="1940" y="0"/>
-</item>
-<item historyLabel="GPIO_metoder.c" index="6">
-<position info="not_deleted" x="1471" y="0"/>
+<item historyLabel="ADC_metoder.h" index="3">
+<position info="not_deleted" x="658" y="0"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="1438" y="0"/>
+<position info="not_deleted" x="6437" y="0"/>
 </item>
-<item historyLabel="GPIO_metoder.c" index="6">
-<position info="not_deleted" x="1471" y="0"/>
-</item>
-<item historyLabel="SysTick_metoder.c" index="3">
-<position info="not_deleted" x="3105" y="0"/>
+<item historyLabel="stm32f30x_adc.c" index="5">
+<position info="not_deleted" x="13159" y="14"/>
 </item>
 <item historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="1469" y="0"/>
+<position info="not_deleted" x="7785" y="0"/>
 </item>
-<item historyLabel="GPIO_metoder.c" index="6">
-<position info="not_deleted" x="1471" y="0"/>
+<item historyLabel="SysTick_metoder.c" index="1">
+<position info="not_deleted" x="3012" y="0"/>
 </item>
 <item active="true" historyLabel="ADC_metoder.c" index="0">
-<position info="not_deleted" x="1469" y="0"/>
+<position info="not_deleted" x="7785" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -403,23 +417,11 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="GPIO_metoder.c" tooltip="usb_can_v02/src/GPIO_metoder.c">
-<persistable path="/usb_can_v02/src/GPIO_metoder.c"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f30x_adc.c" tooltip="usb_can_v02/cmsis_lib/source/stm32f30x_adc.c">
 <persistable path="/usb_can_v02/cmsis_lib/source/stm32f30x_adc.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f30x_adc.h" tooltip="usb_can_v02/cmsis_lib/include/stm32f30x_adc.h">
 <persistable path="/usb_can_v02/cmsis_lib/include/stm32f30x_adc.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="init.c" tooltip="usb_can_v02/src/init.c">
-<persistable path="/usb_can_v02/src/init.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SysTick_metoder.c" tooltip="usb_can_v02/src/SysTick_metoder.c">
-<persistable path="/usb_can_v02/src/SysTick_metoder.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="can_metoder.h" tooltip="usb_can_v02/inc/can_metoder.h">
-<persistable path="/usb_can_v02/inc/can_metoder.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ADC_metoder.h" tooltip="usb_can_v02/inc/ADC_metoder.h">
 <persistable path="/usb_can_v02/inc/ADC_metoder.h"/>
@@ -427,26 +429,32 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="TIM_metoder.c" tooltip="usb_can_v02/src/TIM_metoder.c">
 <persistable path="/usb_can_v02/src/TIM_metoder.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="akselerometer_metoder.c" tooltip="usb_can_v02/src/akselerometer_metoder.c">
-<persistable path="/usb_can_v02/src/akselerometer_metoder.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="def_global_vars.h" tooltip="usb_can_v02/inc/def_global_vars.h">
+<persistable path="/usb_can_v02/inc/def_global_vars.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="akselerometer_metoder.h" tooltip="usb_can_v02/inc/akselerometer_metoder.h">
-<persistable path="/usb_can_v02/inc/akselerometer_metoder.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="SysTick_metoder.c" tooltip="usb_can_v02/src/SysTick_metoder.c">
+<persistable path="/usb_can_v02/src/SysTick_metoder.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f30x_tim.c" tooltip="usb_can_v02/cmsis_lib/source/stm32f30x_tim.c">
-<persistable path="/usb_can_v02/cmsis_lib/source/stm32f30x_tim.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="UART_metoder.c" tooltip="usb_can_v02/src/UART_metoder.c">
+<persistable path="/usb_can_v02/src/UART_metoder.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f3_discovery_l3gd20.c" tooltip="usb_can_v02/stm32f3_discovery/stm32f3_discovery_l3gd20.c">
-<persistable path="/usb_can_v02/stm32f3_discovery/stm32f3_discovery_l3gd20.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f30x_dma.h" tooltip="usb_can_v02/cmsis_lib/include/stm32f30x_dma.h">
+<persistable path="/usb_can_v02/cmsis_lib/include/stm32f30x_dma.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f3_discovery_l3gd20.h" tooltip="usb_can_v02/stm32f3_discovery/stm32f3_discovery_l3gd20.h">
-<persistable path="/usb_can_v02/stm32f3_discovery/stm32f3_discovery_l3gd20.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f30x_dma.c" tooltip="usb_can_v02/cmsis_lib/source/stm32f30x_dma.c">
+<persistable path="/usb_can_v02/cmsis_lib/source/stm32f30x_dma.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="can_metoder.c" tooltip="usb_can_v02/src/can_metoder.c">
-<persistable path="/usb_can_v02/src/can_metoder.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="init.c" tooltip="usb_can_v02/src/init.c">
+<persistable path="/usb_can_v02/src/init.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="TIM_metoder.h" tooltip="usb_can_v02/inc/TIM_metoder.h">
-<persistable path="/usb_can_v02/inc/TIM_metoder.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="startup_stm32f30x.S" tooltip="usb_can_v02/cmsis_boot/startup/startup_stm32f30x.S">
+<persistable path="/usb_can_v02/cmsis_boot/startup/startup_stm32f30x.S"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f30x.h" tooltip="usb_can_v02/cmsis_boot/stm32f30x.h">
+<persistable path="/usb_can_v02/cmsis_boot/stm32f30x.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f30x_temp.c" tooltip="usb_can_v02/cmsis_boot/system_stm32f30x_temp.c">
+<persistable path="/usb_can_v02/cmsis_boot/system_stm32f30x_temp.c"/>
 </file>
 </mruList>
 </workbench>
