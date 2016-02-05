@@ -42,10 +42,6 @@ uint16_t ADC4_getChannel(uint8_t channel);
  */
 
 void DMA1_Channel1_IRQHandler(){
-	/* Indicate that this method is running by blinking an LED */
-	GPIOE->ODR ^= STATUS_LED6 << 8;
-	USART_transmit(ADC1_buffer[3] & 0x00FF);
-
 	/* Indicate to SysTick that a new set of data is ready */
 	new_values |= 0x0F;
 	DMA_ClearITPendingBit(DMA1_IT_TC1);
@@ -251,14 +247,14 @@ void ADC_init(void){
 	 *	DMA_CCRx register.
 	 */
 
-	//	DMA1_Channel1->CCR = 	(DMA_CCR_PL_1) // Prio 0
-	//						|	(DMA_CCR_CIRC)
-	//						|	(DMA_CCR_MINC)
-	//						|	(DMA_CCR_PSIZE_0)
-	//						|	(DMA_CCR_MSIZE_0)
-	//						|	(DMA_CCR_TCIE)
-	//						;
-	DMA1_Channel1->CCR |= 0b010010110100010;
+		DMA1_Channel1->CCR = 	(DMA_CCR_PL_1) // Prio 0
+							|	(DMA_CCR_CIRC)
+							|	(DMA_CCR_MINC)
+							|	(DMA_CCR_PSIZE_0)
+							|	(DMA_CCR_MSIZE_0)
+							|	(DMA_CCR_TCIE)
+							;
+	//DMA1_Channel1->CCR |= 0b010010110100010;
 
 
 	/* Activating the DMA channel */
