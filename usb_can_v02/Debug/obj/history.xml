@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F303VC -DSTM32F30X -I..\..\..\..\..\Users\siver\Documents -I..\..\..\..\..\Users\siver\Documents\usb_can_v02\cmsis_boot -I..\..\..\..\..\Users\siver\Documents\usb_can_v02\cmsis -I..\..\..\..\..\Users\siver\Documents\usb_can_v02\cmsis_lib -I..\..\..\..\..\Users\siver\Documents\usb_can_v02 -I..\..\..\..\..\Users\siver\Documents\usb_can_v02\stm32f3_discovery -I..\..\..\..\..\Users\siver\Documents\usb_can_v02\cmsis_lib\include -I..\..\..\..\..\Users\siver\Documents\usb_can_v02\inc">
+      <target file="stm32f30x_spi.o" lastModified="152ad838ead">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_spi.c" lastModified="152ab58ae2a"/>
+      </target>
+      <target file="system_stm32f30x_temp.o" lastModified="152ad838fe5">
+         <source file="..\..\..\cmsis_boot\system_stm32f30x_temp.c" lastModified="152ab58addc"/>
+      </target>
+      <target file="ADC_metoder.o" lastModified="152ad83946e">
+         <source file="..\..\..\src\ADC_metoder.c" lastModified="152ad72c76a"/>
+      </target>
+      <target file="SysTick_metoder.o" lastModified="152ad839293">
+         <source file="..\..\..\src\SysTick_metoder.c" lastModified="152ad706403"/>
+      </target>
+      <target file="stm32f30x_rcc.o" lastModified="152ad838a75">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_rcc.c" lastModified="152ab58ae2a"/>
+      </target>
+      <target file="akselerometer_metoder.o" lastModified="152ad838f88">
+         <source file="..\..\..\src\akselerometer_metoder.c" lastModified="152ab58ae69"/>
+      </target>
+      <target file="stm32f30x_i2c.o" lastModified="152ad838f2f">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_i2c.c" lastModified="152ab58ae2a"/>
+      </target>
+      <target file="stm32f30x_usart.o" lastModified="152ad83950c">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_usart.c" lastModified="152ab58ae3a"/>
+      </target>
+      <target file="stm32f3_discovery_lsm303dlhc.o" lastModified="152ad838b01">
+         <source file="..\..\..\stm32f3_discovery\stm32f3_discovery_lsm303dlhc.c" lastModified="152ab58ae88"/>
+      </target>
+      <target file="stm32f30x_gpio.o" lastModified="152ad838c24">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_gpio.c" lastModified="152ab58ae1b"/>
+      </target>
+      <target file="stm32f30x_exti.o" lastModified="152ad838e2b">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_exti.c" lastModified="152ab58ae1b"/>
+      </target>
+      <target file="stm32f3_discovery.o" lastModified="152ad83938e">
+         <source file="..\..\..\stm32f3_discovery\stm32f3_discovery.c" lastModified="152ab58ae79"/>
+      </target>
+      <target file="stm32f3_discovery_l3gd20.o" lastModified="152ad8391b3">
+         <source file="..\..\..\stm32f3_discovery\stm32f3_discovery_l3gd20.c" lastModified="152ab58ae88"/>
+      </target>
+      <target file="TIM_metoder.o" lastModified="152ad8393e5">
+         <source file="..\..\..\src\TIM_metoder.c" lastModified="152ad58af81"/>
+      </target>
+      <target file="stm32f30x_can.o" lastModified="152ad839322">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_can.c" lastModified="152ab58ae1b"/>
+      </target>
+      <target file="UART_metoder.o" lastModified="152ad8389fb">
+         <source file="..\..\..\src\UART_metoder.c" lastModified="152ab58ae69"/>
+      </target>
+      <target file="stm32f30x_adc.o" lastModified="152ad838bc1">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_adc.c" lastModified="152ab58ae0b"/>
+      </target>
+      <target file="stm32f30x_misc.o" lastModified="152ad839039">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_misc.c" lastModified="152ab58ae2a"/>
+      </target>
+      <target file="stm32f30x_tim.o" lastModified="152ad83914c">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_tim.c" lastModified="152ab58ae3a"/>
+      </target>
+      <target file="can_metoder.o" lastModified="152ad838dd0">
+         <source file="..\..\..\src\can_metoder.c" lastModified="152ab58ae79"/>
+      </target>
+      <target file="init.o" lastModified="152ad838d5e">
+         <source file="..\..\..\src\init.c" lastModified="152ab58ae79"/>
+      </target>
+      <target file="stm32f30x_dma.o" lastModified="152ad838d17">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_dma.c" lastModified="152ac4e1991"/>
+      </target>
+      <target file="stm32f30x_syscfg.o" lastModified="152ad83923f">
+         <source file="..\..\..\cmsis_lib\source\stm32f30x_syscfg.c" lastModified="152ab58ae3a"/>
+      </target>
+      <target file="startup_stm32f30x.o" lastModified="152ad8391dc">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f30x.S" lastModified="152ab58adcd"/>
+      </target>
+      <target file="GPIO_metoder.o" lastModified="152ad838c6f">
+         <source file="..\..\..\src\GPIO_metoder.c" lastModified="152ab58ae69"/>
+      </target>
+      <target file="main.o" lastModified="152ad838cb9">
+         <source file="..\..\..\main.c" lastModified="152ab58ae59"/>
+      </target>
+   </processor>
+</history>
