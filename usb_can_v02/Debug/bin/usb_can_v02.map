@@ -5,11 +5,19 @@ Common symbol       size              file
 akselerometer_mottaksbuffer
                     0x6               ..\obj\akselerometer_metoder.o
 ADC4_conv_val       0x2               ..\obj\ADC_metoder.o
-RxMsg               0x14              ..\obj\can_metoder.o
-Rx_Array            0x80              ..\obj\can_metoder.o
+RxMsg               0x14              ..\obj\rov2016_canbus.o
+Rx_Array            0x80              ..\obj\rov2016_canbus.o
 
 Discarded input sections
 
+ .text          0x00000000        0x0 ..\obj\rov2016_canbus.o
+ .data          0x00000000        0x0 ..\obj\rov2016_canbus.o
+ .text.CAN_transmitByte
+                0x00000000       0x7c ..\obj\rov2016_canbus.o
+ .text.CAN_transmit_AN_RAW
+                0x00000000       0xf4 ..\obj\rov2016_canbus.o
+ .text.CAN_transmitAcceleration
+                0x00000000       0x98 ..\obj\rov2016_canbus.o
  .text          0x00000000        0x0 ..\obj\UART_metoder.o
  .data          0x00000000        0x0 ..\obj\UART_metoder.o
  .text.USART_getNewBytes
@@ -259,14 +267,6 @@ Discarded input sections
  .text          0x00000000        0x0 ..\obj\init.o
  .data          0x00000000        0x0 ..\obj\init.o
  .bss           0x00000000        0x0 ..\obj\init.o
- .text          0x00000000        0x0 ..\obj\can_metoder.o
- .data          0x00000000        0x0 ..\obj\can_metoder.o
- .text.CAN_transmitByte
-                0x00000000       0x7c ..\obj\can_metoder.o
- .text.CAN_transmit_AN_RAW
-                0x00000000       0xf4 ..\obj\can_metoder.o
- .text.CAN_transmitAcceleration
-                0x00000000       0x98 ..\obj\can_metoder.o
  .text          0x00000000        0x0 ..\obj\stm32f30x_exti.o
  .data          0x00000000        0x0 ..\obj\stm32f30x_exti.o
  .bss           0x00000000        0x0 ..\obj\stm32f30x_exti.o
@@ -935,133 +935,133 @@ Linker script and memory map
 
                 0x2000a000                _eram = 0x2000a000
 
-.text           0x08000000     0x30df
+.text           0x08000000     0x30a3
  *(.isr_vector)
  .isr_vector    0x08000000      0x188 ..\obj\startup_stm32f30x.o
                 0x08000000                g_pfnVectors
  *(.text*)
- .text.USART2_IRQHandler
-                0x08000188       0x80 ..\obj\UART_metoder.o
-                0x08000188                USART2_IRQHandler
- .text.USART_init
-                0x08000208       0xd8 ..\obj\UART_metoder.o
-                0x08000208                USART_init
- .text.USART_transmit
-                0x080002e0       0x64 ..\obj\UART_metoder.o
-                0x080002e0                USART_transmit
- .text.RCC_GetClocksFreq
-                0x08000344      0x414 ..\obj\stm32f30x_rcc.o
-                0x08000344                RCC_GetClocksFreq
- .text.RCC_ADCCLKConfig
-                0x08000758       0x4c ..\obj\stm32f30x_rcc.o
-                0x08000758                RCC_ADCCLKConfig
- .text.RCC_AHBPeriphClockCmd
-                0x080007a4       0x3c ..\obj\stm32f30x_rcc.o
-                0x080007a4                RCC_AHBPeriphClockCmd
- .text.RCC_APB2PeriphClockCmd
-                0x080007e0       0x3c ..\obj\stm32f30x_rcc.o
-                0x080007e0                RCC_APB2PeriphClockCmd
- .text.RCC_APB1PeriphClockCmd
-                0x0800081c       0x3c ..\obj\stm32f30x_rcc.o
-                0x0800081c                RCC_APB1PeriphClockCmd
- .text.RCC_AHBPeriphResetCmd
-                0x08000858       0x3c ..\obj\stm32f30x_rcc.o
-                0x08000858                RCC_AHBPeriphResetCmd
- .text.RCC_APB1PeriphResetCmd
-                0x08000894       0x3c ..\obj\stm32f30x_rcc.o
-                0x08000894                RCC_APB1PeriphResetCmd
- .text.LSM303DLHC_AccInit
-                0x080008d0       0x78 ..\obj\stm32f3_discovery_lsm303dlhc.o
-                0x080008d0                LSM303DLHC_AccInit
- .text.LSM303DLHC_Write
-                0x08000948      0x160 ..\obj\stm32f3_discovery_lsm303dlhc.o
-                0x08000948                LSM303DLHC_Write
- .text.LSM303DLHC_LowLevel_Init
-                0x08000aa8      0x150 ..\obj\stm32f3_discovery_lsm303dlhc.o
- .text.LSM303DLHC_TIMEOUT_UserCallback
-                0x08000bf8        0x8 ..\obj\stm32f3_discovery_lsm303dlhc.o
-                0x08000bf8                LSM303DLHC_TIMEOUT_UserCallback
- .text.ADC_DeInit
-                0x08000c00       0x64 ..\obj\stm32f30x_adc.o
-                0x08000c00                ADC_DeInit
- .text.ADC_Init
-                0x08000c64       0x80 ..\obj\stm32f30x_adc.o
-                0x08000c64                ADC_Init
- .text.ADC_CommonInit
-                0x08000ce4       0x9c ..\obj\stm32f30x_adc.o
-                0x08000ce4                ADC_CommonInit
- .text.ADC_Cmd  0x08000d80       0x38 ..\obj\stm32f30x_adc.o
-                0x08000d80                ADC_Cmd
- .text.ADC_StartCalibration
-                0x08000db8       0x20 ..\obj\stm32f30x_adc.o
-                0x08000db8                ADC_StartCalibration
- .text.ADC_SelectCalibrationMode
-                0x08000dd8       0x2c ..\obj\stm32f30x_adc.o
-                0x08000dd8                ADC_SelectCalibrationMode
- .text.ADC_GetCalibrationStatus
-                0x08000e04       0x2c ..\obj\stm32f30x_adc.o
-                0x08000e04                ADC_GetCalibrationStatus
- .text.ADC_VoltageRegulatorCmd
-                0x08000e30       0x44 ..\obj\stm32f30x_adc.o
-                0x08000e30                ADC_VoltageRegulatorCmd
- .text.ADC_RegularChannelConfig
-                0x08000e74      0x1f0 ..\obj\stm32f30x_adc.o
-                0x08000e74                ADC_RegularChannelConfig
- .text.ADC_StartConversion
-                0x08001064       0x20 ..\obj\stm32f30x_adc.o
-                0x08001064                ADC_StartConversion
- .text.ADC_GetConversionValue
-                0x08001084       0x1c ..\obj\stm32f30x_adc.o
-                0x08001084                ADC_GetConversionValue
- .text.ADC_DMACmd
-                0x080010a0       0x38 ..\obj\stm32f30x_adc.o
-                0x080010a0                ADC_DMACmd
- .text.ADC_ITConfig
-                0x080010d8       0x3c ..\obj\stm32f30x_adc.o
-                0x080010d8                ADC_ITConfig
- .text.ADC_GetFlagStatus
-                0x08001114       0x34 ..\obj\stm32f30x_adc.o
-                0x08001114                ADC_GetFlagStatus
- .text.ADC_ClearFlag
-                0x08001148       0x1c ..\obj\stm32f30x_adc.o
-                0x08001148                ADC_ClearFlag
- .text.GPIO_Init
-                0x08001164      0x128 ..\obj\stm32f30x_gpio.o
-                0x08001164                GPIO_Init
- .text.GPIO_PinAFConfig
-                0x0800128c       0x90 ..\obj\stm32f30x_gpio.o
-                0x0800128c                GPIO_PinAFConfig
- .text.GPIO_init
-                0x0800131c       0x60 ..\obj\GPIO_metoder.o
-                0x0800131c                GPIO_init
- .text.main     0x0800137c       0x2c ..\obj\main.o
-                0x0800137c                main
- .text.DMA_DeInit
-                0x080013a8      0x178 ..\obj\stm32f30x_dma.o
-                0x080013a8                DMA_DeInit
- .text.DMA_GetFlagStatus
-                0x08001520       0x54 ..\obj\stm32f30x_dma.o
-                0x08001520                DMA_GetFlagStatus
- .text.DMA_ClearFlag
-                0x08001574       0x34 ..\obj\stm32f30x_dma.o
-                0x08001574                DMA_ClearFlag
- .text.DMA_ClearITPendingBit
-                0x080015a8       0x34 ..\obj\stm32f30x_dma.o
-                0x080015a8                DMA_ClearITPendingBit
- .text.init     0x080015dc       0x28 ..\obj\init.o
-                0x080015dc                init
  .text.CAN_Config
-                0x08001604      0x168 ..\obj\can_metoder.o
-                0x08001604                CAN_Config
+                0x08000188      0x168 ..\obj\rov2016_canbus.o
+                0x08000188                CAN_Config
  .text.USB_LP_CAN1_RX0_IRQHandler
-                0x0800176c       0x90 ..\obj\can_metoder.o
-                0x0800176c                USB_LP_CAN1_RX0_IRQHandler
+                0x080002f0       0x90 ..\obj\rov2016_canbus.o
+                0x080002f0                USB_LP_CAN1_RX0_IRQHandler
  .text.CAN_getRxMessages
-                0x080017fc       0x18 ..\obj\can_metoder.o
-                0x080017fc                CAN_getRxMessages
+                0x08000380       0x18 ..\obj\rov2016_canbus.o
+                0x08000380                CAN_getRxMessages
  .text.CAN_getByteFromMessage
-                0x08001814       0x30 ..\obj\can_metoder.o
-                0x08001814                CAN_getByteFromMessage
+                0x08000398       0x30 ..\obj\rov2016_canbus.o
+                0x08000398                CAN_getByteFromMessage
+ .text.USART2_IRQHandler
+                0x080003c8       0x80 ..\obj\UART_metoder.o
+                0x080003c8                USART2_IRQHandler
+ .text.USART_init
+                0x08000448       0xd8 ..\obj\UART_metoder.o
+                0x08000448                USART_init
+ .text.USART_transmit
+                0x08000520       0x64 ..\obj\UART_metoder.o
+                0x08000520                USART_transmit
+ .text.RCC_GetClocksFreq
+                0x08000584      0x414 ..\obj\stm32f30x_rcc.o
+                0x08000584                RCC_GetClocksFreq
+ .text.RCC_ADCCLKConfig
+                0x08000998       0x4c ..\obj\stm32f30x_rcc.o
+                0x08000998                RCC_ADCCLKConfig
+ .text.RCC_AHBPeriphClockCmd
+                0x080009e4       0x3c ..\obj\stm32f30x_rcc.o
+                0x080009e4                RCC_AHBPeriphClockCmd
+ .text.RCC_APB2PeriphClockCmd
+                0x08000a20       0x3c ..\obj\stm32f30x_rcc.o
+                0x08000a20                RCC_APB2PeriphClockCmd
+ .text.RCC_APB1PeriphClockCmd
+                0x08000a5c       0x3c ..\obj\stm32f30x_rcc.o
+                0x08000a5c                RCC_APB1PeriphClockCmd
+ .text.RCC_AHBPeriphResetCmd
+                0x08000a98       0x3c ..\obj\stm32f30x_rcc.o
+                0x08000a98                RCC_AHBPeriphResetCmd
+ .text.RCC_APB1PeriphResetCmd
+                0x08000ad4       0x3c ..\obj\stm32f30x_rcc.o
+                0x08000ad4                RCC_APB1PeriphResetCmd
+ .text.LSM303DLHC_AccInit
+                0x08000b10       0x78 ..\obj\stm32f3_discovery_lsm303dlhc.o
+                0x08000b10                LSM303DLHC_AccInit
+ .text.LSM303DLHC_Write
+                0x08000b88      0x160 ..\obj\stm32f3_discovery_lsm303dlhc.o
+                0x08000b88                LSM303DLHC_Write
+ .text.LSM303DLHC_LowLevel_Init
+                0x08000ce8      0x150 ..\obj\stm32f3_discovery_lsm303dlhc.o
+ .text.LSM303DLHC_TIMEOUT_UserCallback
+                0x08000e38        0x8 ..\obj\stm32f3_discovery_lsm303dlhc.o
+                0x08000e38                LSM303DLHC_TIMEOUT_UserCallback
+ .text.ADC_DeInit
+                0x08000e40       0x64 ..\obj\stm32f30x_adc.o
+                0x08000e40                ADC_DeInit
+ .text.ADC_Init
+                0x08000ea4       0x80 ..\obj\stm32f30x_adc.o
+                0x08000ea4                ADC_Init
+ .text.ADC_CommonInit
+                0x08000f24       0x9c ..\obj\stm32f30x_adc.o
+                0x08000f24                ADC_CommonInit
+ .text.ADC_Cmd  0x08000fc0       0x38 ..\obj\stm32f30x_adc.o
+                0x08000fc0                ADC_Cmd
+ .text.ADC_StartCalibration
+                0x08000ff8       0x20 ..\obj\stm32f30x_adc.o
+                0x08000ff8                ADC_StartCalibration
+ .text.ADC_SelectCalibrationMode
+                0x08001018       0x2c ..\obj\stm32f30x_adc.o
+                0x08001018                ADC_SelectCalibrationMode
+ .text.ADC_GetCalibrationStatus
+                0x08001044       0x2c ..\obj\stm32f30x_adc.o
+                0x08001044                ADC_GetCalibrationStatus
+ .text.ADC_VoltageRegulatorCmd
+                0x08001070       0x44 ..\obj\stm32f30x_adc.o
+                0x08001070                ADC_VoltageRegulatorCmd
+ .text.ADC_RegularChannelConfig
+                0x080010b4      0x1f0 ..\obj\stm32f30x_adc.o
+                0x080010b4                ADC_RegularChannelConfig
+ .text.ADC_StartConversion
+                0x080012a4       0x20 ..\obj\stm32f30x_adc.o
+                0x080012a4                ADC_StartConversion
+ .text.ADC_GetConversionValue
+                0x080012c4       0x1c ..\obj\stm32f30x_adc.o
+                0x080012c4                ADC_GetConversionValue
+ .text.ADC_DMACmd
+                0x080012e0       0x38 ..\obj\stm32f30x_adc.o
+                0x080012e0                ADC_DMACmd
+ .text.ADC_ITConfig
+                0x08001318       0x3c ..\obj\stm32f30x_adc.o
+                0x08001318                ADC_ITConfig
+ .text.ADC_GetFlagStatus
+                0x08001354       0x34 ..\obj\stm32f30x_adc.o
+                0x08001354                ADC_GetFlagStatus
+ .text.ADC_ClearFlag
+                0x08001388       0x1c ..\obj\stm32f30x_adc.o
+                0x08001388                ADC_ClearFlag
+ .text.GPIO_Init
+                0x080013a4      0x128 ..\obj\stm32f30x_gpio.o
+                0x080013a4                GPIO_Init
+ .text.GPIO_PinAFConfig
+                0x080014cc       0x90 ..\obj\stm32f30x_gpio.o
+                0x080014cc                GPIO_PinAFConfig
+ .text.GPIO_init
+                0x0800155c       0x60 ..\obj\GPIO_metoder.o
+                0x0800155c                GPIO_init
+ .text.main     0x080015bc       0x2c ..\obj\main.o
+                0x080015bc                main
+ .text.DMA_DeInit
+                0x080015e8      0x178 ..\obj\stm32f30x_dma.o
+                0x080015e8                DMA_DeInit
+ .text.DMA_GetFlagStatus
+                0x08001760       0x54 ..\obj\stm32f30x_dma.o
+                0x08001760                DMA_GetFlagStatus
+ .text.DMA_ClearFlag
+                0x080017b4       0x34 ..\obj\stm32f30x_dma.o
+                0x080017b4                DMA_ClearFlag
+ .text.DMA_ClearITPendingBit
+                0x080017e8       0x34 ..\obj\stm32f30x_dma.o
+                0x080017e8                DMA_ClearITPendingBit
+ .text.init     0x0800181c       0x28 ..\obj\init.o
+                0x0800181c                init
  .text.EXTI_Init
                 0x08001844      0x1f4 ..\obj\stm32f30x_exti.o
                 0x08001844                EXTI_Init
@@ -1215,44 +1215,44 @@ Linker script and memory map
                 0x08002868       0x50 ..\obj\TIM_metoder.o
                 0x08002868                TIM2_init
  .text.DMA1_Channel1_IRQHandler
-                0x080028b8       0x58 ..\obj\ADC_metoder.o
+                0x080028b8       0x24 ..\obj\ADC_metoder.o
                 0x080028b8                DMA1_Channel1_IRQHandler
  .text.ADC1_2_IRQHandler
-                0x08002910      0x100 ..\obj\ADC_metoder.o
-                0x08002910                ADC1_2_IRQHandler
+                0x080028dc      0x100 ..\obj\ADC_metoder.o
+                0x080028dc                ADC1_2_IRQHandler
  .text.ADC4_IRQHandler
-                0x08002a10       0x6c ..\obj\ADC_metoder.o
-                0x08002a10                ADC4_IRQHandler
+                0x080029dc       0x6c ..\obj\ADC_metoder.o
+                0x080029dc                ADC4_IRQHandler
  .text.ADC_init
-                0x08002a7c      0x29c ..\obj\ADC_metoder.o
-                0x08002a7c                ADC_init
+                0x08002a48      0x294 ..\obj\ADC_metoder.o
+                0x08002a48                ADC_init
  .text.USART_Init
-                0x08002d18      0x174 ..\obj\stm32f30x_usart.o
-                0x08002d18                USART_Init
+                0x08002cdc      0x174 ..\obj\stm32f30x_usart.o
+                0x08002cdc                USART_Init
  .text.USART_ClockInit
-                0x08002e8c       0x48 ..\obj\stm32f30x_usart.o
-                0x08002e8c                USART_ClockInit
+                0x08002e50       0x48 ..\obj\stm32f30x_usart.o
+                0x08002e50                USART_ClockInit
  .text.USART_ClockStructInit
-                0x08002ed4       0x2c ..\obj\stm32f30x_usart.o
-                0x08002ed4                USART_ClockStructInit
+                0x08002e98       0x2c ..\obj\stm32f30x_usart.o
+                0x08002e98                USART_ClockStructInit
  .text.USART_Cmd
-                0x08002f00       0x38 ..\obj\stm32f30x_usart.o
-                0x08002f00                USART_Cmd
+                0x08002ec4       0x38 ..\obj\stm32f30x_usart.o
+                0x08002ec4                USART_Cmd
  .text.USART_SendData
-                0x08002f38       0x24 ..\obj\stm32f30x_usart.o
-                0x08002f38                USART_SendData
+                0x08002efc       0x24 ..\obj\stm32f30x_usart.o
+                0x08002efc                USART_SendData
  .text.USART_ReceiveData
-                0x08002f5c       0x20 ..\obj\stm32f30x_usart.o
-                0x08002f5c                USART_ReceiveData
+                0x08002f20       0x20 ..\obj\stm32f30x_usart.o
+                0x08002f20                USART_ReceiveData
  .text.USART_ITConfig
-                0x08002f7c       0x84 ..\obj\stm32f30x_usart.o
-                0x08002f7c                USART_ITConfig
+                0x08002f40       0x84 ..\obj\stm32f30x_usart.o
+                0x08002f40                USART_ITConfig
  .text.USART_GetFlagStatus
-                0x08003000       0x34 ..\obj\stm32f30x_usart.o
-                0x08003000                USART_GetFlagStatus
+                0x08002fc4       0x34 ..\obj\stm32f30x_usart.o
+                0x08002fc4                USART_GetFlagStatus
  .text.USART_GetITStatus
-                0x08003034       0xa0 ..\obj\stm32f30x_usart.o
-                0x08003034                USART_GetITStatus
+                0x08002ff8       0xa0 ..\obj\stm32f30x_usart.o
+                0x08002ff8                USART_GetITStatus
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -1266,49 +1266,49 @@ Linker script and memory map
  *(SORT(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x080030d4        0xb ..\obj\main.o
-                0x080030d4                ACC_AXIS_X
-                0x080030d5                ACC_AXIS_Y
-                0x080030d6                ACC_AXIS_Z
-                0x080030d7                MAIN_LOOP_LED
-                0x080030d8                SYSTICK_LED
-                0x080030d9                CAN_RX_LED
-                0x080030da                CAN_TX_LED
-                0x080030db                UART_RX_LED
-                0x080030dc                UART_TX_LED
-                0x080030dd                STATUS_LED6
-                0x080030de                STATUS_LED7
+ .rodata        0x08003098        0xb ..\obj\main.o
+                0x08003098                ACC_AXIS_X
+                0x08003099                ACC_AXIS_Y
+                0x0800309a                ACC_AXIS_Z
+                0x0800309b                MAIN_LOOP_LED
+                0x0800309c                SYSTICK_LED
+                0x0800309d                CAN_RX_LED
+                0x0800309e                CAN_TX_LED
+                0x0800309f                UART_RX_LED
+                0x080030a0                UART_TX_LED
+                0x080030a1                STATUS_LED6
+                0x080030a2                STATUS_LED7
  *(.eh_fram e*)
 
-.glue_7         0x080030e0        0x0
+.glue_7         0x080030a4        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x080030e0        0x0
+.glue_7t        0x080030a4        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x080030e0        0x0
+.vfp11_veneer   0x080030a4        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x080030e0        0x0
+.v4_bx          0x080030a4        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x080030e0        0x0
- .iplt          0x00000000        0x0 ..\obj\UART_metoder.o
+.iplt           0x080030a4        0x0
+ .iplt          0x00000000        0x0 ..\obj\rov2016_canbus.o
 
-.rel.dyn        0x080030e0        0x0
- .rel.iplt      0x00000000        0x0 ..\obj\UART_metoder.o
+.rel.dyn        0x080030a4        0x0
+ .rel.iplt      0x00000000        0x0 ..\obj\rov2016_canbus.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x080030e0                __exidx_start = .
+                0x080030a4                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x080030e0                __exidx_end = .
-                0x080030e0                __etext = .
-                0x080030df                _sidata = __etext
+                0x080030a4                __exidx_end = .
+                0x080030a4                __etext = .
+                0x080030a3                _sidata = __etext
 
-.data           0x20000000       0x30 load address 0x080030df
+.data           0x20000000       0x30 load address 0x080030a3
                 0x20000000                __data_start__ = .
                 0x20000000                _sdata = __data_start__
  *(vtable)
@@ -1336,25 +1336,25 @@ Linker script and memory map
                 0x20000030                __data_end__ = .
                 0x20000030                _edata = __data_end__
 
-.igot.plt       0x20000030        0x0 load address 0x08003110
- .igot.plt      0x00000000        0x0 ..\obj\UART_metoder.o
+.igot.plt       0x20000030        0x0 load address 0x080030d4
+ .igot.plt      0x00000000        0x0 ..\obj\rov2016_canbus.o
 
-.bss            0x20000030       0xd4 load address 0x08003110
+.bss            0x20000030       0xd4 load address 0x080030d4
                 0x20000030                . = ALIGN (0x4)
                 0x20000030                __bss_start__ = .
                 0x20000030                _sbss = __bss_start__
  *(.bss*)
- .bss           0x20000030        0xd ..\obj\UART_metoder.o
-                0x20000030                rx_buffer
-                0x2000003a                rx_buffer_write_counter
-                0x2000003b                rx_buffer_read_counter
-                0x2000003c                new_bytes
- *fill*         0x2000003d        0x3 
- .bss           0x20000040       0x16 ..\obj\can_metoder.o
-                0x20000040                TxMsg
-                0x20000054                rx_messages
-                0x20000055                TransmitMailbox
- *fill*         0x20000056        0x2 
+ .bss           0x20000030       0x16 ..\obj\rov2016_canbus.o
+                0x20000030                TxMsg
+                0x20000044                rx_messages
+                0x20000045                TransmitMailbox
+ *fill*         0x20000046        0x2 
+ .bss           0x20000048        0xd ..\obj\UART_metoder.o
+                0x20000048                rx_buffer
+                0x20000052                rx_buffer_write_counter
+                0x20000053                rx_buffer_read_counter
+                0x20000054                new_bytes
+ *fill*         0x20000055        0x3 
  .bss           0x20000058        0x8 ..\obj\SysTick_metoder.o
                 0x20000058                teller
                 0x2000005a                val
@@ -1364,7 +1364,7 @@ Linker script and memory map
                 0x20000061                channel_counter
                 0x20000064                ADC1_buffer
  *(COMMON)
- COMMON         0x2000006c       0x94 ..\obj\can_metoder.o
+ COMMON         0x2000006c       0x94 ..\obj\rov2016_canbus.o
                 0x2000006c                RxMsg
                 0x20000080                Rx_Array
  COMMON         0x20000100        0x2 ..\obj\ADC_metoder.o
@@ -1381,7 +1381,7 @@ Linker script and memory map
  *(.heap*)
                 0x20000104                __HeapLimit = .
 
-.co_stack       0x20000104        0x4 load address 0x080031e4
+.co_stack       0x20000104        0x4 load address 0x080031a8
                 0x20000108                . = ALIGN (0x8)
  *fill*         0x20000104        0x4 
  *(.co_stack .co_stack.*)
@@ -1389,6 +1389,7 @@ Linker script and memory map
                 0x20009ffc                __StackLimit = (__StackTop - SIZEOF (.co_stack))
                 0x2000a000                PROVIDE (__stack, __StackTop)
                 0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region ram  overflowed with stack)
+LOAD ..\obj\rov2016_canbus.o
 LOAD ..\obj\UART_metoder.o
 LOAD ..\obj\stm32f30x_rcc.o
 LOAD ..\obj\stm32f3_discovery_lsm303dlhc.o
@@ -1398,7 +1399,6 @@ LOAD ..\obj\GPIO_metoder.o
 LOAD ..\obj\main.o
 LOAD ..\obj\stm32f30x_dma.o
 LOAD ..\obj\init.o
-LOAD ..\obj\can_metoder.o
 LOAD ..\obj\stm32f30x_exti.o
 LOAD ..\obj\stm32f30x_spi.o
 LOAD ..\obj\stm32f30x_i2c.o
@@ -1422,17 +1422,17 @@ LOAD c:/program files (x86)/gnu tools arm embedded/4.9 2015q2/bin/../lib/gcc/arm
 END GROUP
 OUTPUT(usb_can_v02.elf elf32-littlearm)
 
-.debug_info     0x00000000     0xbe7d
- .debug_info    0x00000000      0x799 ..\obj\UART_metoder.o
- .debug_info    0x00000799      0xaac ..\obj\stm32f30x_rcc.o
- .debug_info    0x00001245      0x99b ..\obj\stm32f3_discovery_lsm303dlhc.o
- .debug_info    0x00001be0     0x1317 ..\obj\stm32f30x_adc.o
- .debug_info    0x00002ef7      0x5fa ..\obj\stm32f30x_gpio.o
- .debug_info    0x000034f1      0x2cf ..\obj\GPIO_metoder.o
- .debug_info    0x000037c0      0x2b9 ..\obj\main.o
- .debug_info    0x00003a79      0x473 ..\obj\stm32f30x_dma.o
- .debug_info    0x00003eec       0x33 ..\obj\init.o
- .debug_info    0x00003f1f      0xb24 ..\obj\can_metoder.o
+.debug_info     0x00000000     0xbe6b
+ .debug_info    0x00000000      0xb24 ..\obj\rov2016_canbus.o
+ .debug_info    0x00000b24      0x799 ..\obj\UART_metoder.o
+ .debug_info    0x000012bd      0xaac ..\obj\stm32f30x_rcc.o
+ .debug_info    0x00001d69      0x99b ..\obj\stm32f3_discovery_lsm303dlhc.o
+ .debug_info    0x00002704     0x1317 ..\obj\stm32f30x_adc.o
+ .debug_info    0x00003a1b      0x5fa ..\obj\stm32f30x_gpio.o
+ .debug_info    0x00004015      0x2cf ..\obj\GPIO_metoder.o
+ .debug_info    0x000042e4      0x2b9 ..\obj\main.o
+ .debug_info    0x0000459d      0x473 ..\obj\stm32f30x_dma.o
+ .debug_info    0x00004a10       0x33 ..\obj\init.o
  .debug_info    0x00004a43      0x3b4 ..\obj\stm32f30x_exti.o
  .debug_info    0x00004df7      0xbde ..\obj\stm32f30x_i2c.o
  .debug_info    0x000059d5      0x1f9 ..\obj\akselerometer_metoder.o
@@ -1444,20 +1444,20 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_info    0x00008b98      0x92d ..\obj\SysTick_metoder.o
  .debug_info    0x000094c5      0xb9c ..\obj\stm32f30x_can.o
  .debug_info    0x0000a061      0x598 ..\obj\TIM_metoder.o
- .debug_info    0x0000a5f9      0x9c8 ..\obj\ADC_metoder.o
- .debug_info    0x0000afc1      0xebc ..\obj\stm32f30x_usart.o
+ .debug_info    0x0000a5f9      0x9b6 ..\obj\ADC_metoder.o
+ .debug_info    0x0000afaf      0xebc ..\obj\stm32f30x_usart.o
 
 .debug_abbrev   0x00000000     0x1ec0
- .debug_abbrev  0x00000000      0x181 ..\obj\UART_metoder.o
- .debug_abbrev  0x00000181      0x1e3 ..\obj\stm32f30x_rcc.o
- .debug_abbrev  0x00000364      0x1b7 ..\obj\stm32f3_discovery_lsm303dlhc.o
- .debug_abbrev  0x0000051b      0x190 ..\obj\stm32f30x_adc.o
- .debug_abbrev  0x000006ab      0x194 ..\obj\stm32f30x_gpio.o
- .debug_abbrev  0x0000083f       0xff ..\obj\GPIO_metoder.o
- .debug_abbrev  0x0000093e       0xc9 ..\obj\main.o
- .debug_abbrev  0x00000a07      0x155 ..\obj\stm32f30x_dma.o
- .debug_abbrev  0x00000b5c       0x2a ..\obj\init.o
- .debug_abbrev  0x00000b86      0x20f ..\obj\can_metoder.o
+ .debug_abbrev  0x00000000      0x20f ..\obj\rov2016_canbus.o
+ .debug_abbrev  0x0000020f      0x181 ..\obj\UART_metoder.o
+ .debug_abbrev  0x00000390      0x1e3 ..\obj\stm32f30x_rcc.o
+ .debug_abbrev  0x00000573      0x1b7 ..\obj\stm32f3_discovery_lsm303dlhc.o
+ .debug_abbrev  0x0000072a      0x190 ..\obj\stm32f30x_adc.o
+ .debug_abbrev  0x000008ba      0x194 ..\obj\stm32f30x_gpio.o
+ .debug_abbrev  0x00000a4e       0xff ..\obj\GPIO_metoder.o
+ .debug_abbrev  0x00000b4d       0xc9 ..\obj\main.o
+ .debug_abbrev  0x00000c16      0x155 ..\obj\stm32f30x_dma.o
+ .debug_abbrev  0x00000d6b       0x2a ..\obj\init.o
  .debug_abbrev  0x00000d95      0x17a ..\obj\stm32f30x_exti.o
  .debug_abbrev  0x00000f0f      0x17e ..\obj\stm32f30x_i2c.o
  .debug_abbrev  0x0000108d      0x109 ..\obj\akselerometer_metoder.o
@@ -1474,25 +1474,25 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
 
 .debug_aranges  0x00000000      0xfd0
  .debug_aranges
-                0x00000000       0x40 ..\obj\UART_metoder.o
+                0x00000000       0x50 ..\obj\rov2016_canbus.o
  .debug_aranges
-                0x00000040      0x150 ..\obj\stm32f30x_rcc.o
+                0x00000050       0x40 ..\obj\UART_metoder.o
  .debug_aranges
-                0x00000190       0xa0 ..\obj\stm32f3_discovery_lsm303dlhc.o
+                0x00000090      0x150 ..\obj\stm32f30x_rcc.o
  .debug_aranges
-                0x00000230      0x210 ..\obj\stm32f30x_adc.o
+                0x000001e0       0xa0 ..\obj\stm32f3_discovery_lsm303dlhc.o
  .debug_aranges
-                0x00000440       0x80 ..\obj\stm32f30x_gpio.o
+                0x00000280      0x210 ..\obj\stm32f30x_adc.o
  .debug_aranges
-                0x000004c0       0x20 ..\obj\GPIO_metoder.o
+                0x00000490       0x80 ..\obj\stm32f30x_gpio.o
  .debug_aranges
-                0x000004e0       0x20 ..\obj\main.o
+                0x00000510       0x20 ..\obj\GPIO_metoder.o
  .debug_aranges
-                0x00000500       0x70 ..\obj\stm32f30x_dma.o
+                0x00000530       0x20 ..\obj\main.o
  .debug_aranges
-                0x00000570       0x20 ..\obj\init.o
+                0x00000550       0x70 ..\obj\stm32f30x_dma.o
  .debug_aranges
-                0x00000590       0x50 ..\obj\can_metoder.o
+                0x000005c0       0x20 ..\obj\init.o
  .debug_aranges
                 0x000005e0       0x58 ..\obj\stm32f30x_exti.o
  .debug_aranges
@@ -1521,16 +1521,16 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
                 0x00000e30      0x1a0 ..\obj\stm32f30x_usart.o
 
 .debug_ranges   0x00000000      0xe68
- .debug_ranges  0x00000000       0x30 ..\obj\UART_metoder.o
- .debug_ranges  0x00000030      0x140 ..\obj\stm32f30x_rcc.o
- .debug_ranges  0x00000170       0x90 ..\obj\stm32f3_discovery_lsm303dlhc.o
- .debug_ranges  0x00000200      0x200 ..\obj\stm32f30x_adc.o
- .debug_ranges  0x00000400       0x70 ..\obj\stm32f30x_gpio.o
- .debug_ranges  0x00000470       0x10 ..\obj\GPIO_metoder.o
- .debug_ranges  0x00000480       0x10 ..\obj\main.o
- .debug_ranges  0x00000490       0x60 ..\obj\stm32f30x_dma.o
- .debug_ranges  0x000004f0       0x10 ..\obj\init.o
- .debug_ranges  0x00000500       0x40 ..\obj\can_metoder.o
+ .debug_ranges  0x00000000       0x40 ..\obj\rov2016_canbus.o
+ .debug_ranges  0x00000040       0x30 ..\obj\UART_metoder.o
+ .debug_ranges  0x00000070      0x140 ..\obj\stm32f30x_rcc.o
+ .debug_ranges  0x000001b0       0x90 ..\obj\stm32f3_discovery_lsm303dlhc.o
+ .debug_ranges  0x00000240      0x200 ..\obj\stm32f30x_adc.o
+ .debug_ranges  0x00000440       0x70 ..\obj\stm32f30x_gpio.o
+ .debug_ranges  0x000004b0       0x10 ..\obj\GPIO_metoder.o
+ .debug_ranges  0x000004c0       0x10 ..\obj\main.o
+ .debug_ranges  0x000004d0       0x60 ..\obj\stm32f30x_dma.o
+ .debug_ranges  0x00000530       0x10 ..\obj\init.o
  .debug_ranges  0x00000540       0x48 ..\obj\stm32f30x_exti.o
  .debug_ranges  0x00000588      0x158 ..\obj\stm32f30x_i2c.o
  .debug_ranges  0x000006e0       0x20 ..\obj\akselerometer_metoder.o
@@ -1545,80 +1545,81 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_ranges  0x00000c98       0x40 ..\obj\ADC_metoder.o
  .debug_ranges  0x00000cd8      0x190 ..\obj\stm32f30x_usart.o
 
-.debug_line     0x00000000     0x551f
- .debug_line    0x00000000      0x2fa ..\obj\UART_metoder.o
- .debug_line    0x000002fa      0x59e ..\obj\stm32f30x_rcc.o
- .debug_line    0x00000898      0x46e ..\obj\stm32f3_discovery_lsm303dlhc.o
- .debug_line    0x00000d06      0x7cb ..\obj\stm32f30x_adc.o
- .debug_line    0x000014d1      0x330 ..\obj\stm32f30x_gpio.o
- .debug_line    0x00001801      0x201 ..\obj\GPIO_metoder.o
- .debug_line    0x00001a02      0x1e8 ..\obj\main.o
- .debug_line    0x00001bea      0x30c ..\obj\stm32f30x_dma.o
- .debug_line    0x00001ef6       0x68 ..\obj\init.o
- .debug_line    0x00001f5e      0x35d ..\obj\can_metoder.o
- .debug_line    0x000022bb      0x2bb ..\obj\stm32f30x_exti.o
- .debug_line    0x00002576      0x576 ..\obj\stm32f30x_i2c.o
- .debug_line    0x00002aec      0x27b ..\obj\akselerometer_metoder.o
- .debug_line    0x00002d67      0x201 ..\obj\system_stm32f30x_temp.o
- .debug_line    0x00002f68      0x261 ..\obj\stm32f30x_misc.o
- .debug_line    0x000031c9      0xc68 ..\obj\stm32f30x_tim.o
- .debug_line    0x00003e31       0xa7 ..\obj\startup_stm32f30x.o
- .debug_line    0x00003ed8      0x2c5 ..\obj\stm32f30x_syscfg.o
- .debug_line    0x0000419d      0x22f ..\obj\SysTick_metoder.o
- .debug_line    0x000043cc      0x559 ..\obj\stm32f30x_can.o
- .debug_line    0x00004925      0x259 ..\obj\TIM_metoder.o
- .debug_line    0x00004b7e      0x37e ..\obj\ADC_metoder.o
- .debug_line    0x00004efc      0x623 ..\obj\stm32f30x_usart.o
+.debug_line     0x00000000     0x5524
+ .debug_line    0x00000000      0x364 ..\obj\rov2016_canbus.o
+ .debug_line    0x00000364      0x2fa ..\obj\UART_metoder.o
+ .debug_line    0x0000065e      0x59e ..\obj\stm32f30x_rcc.o
+ .debug_line    0x00000bfc      0x46e ..\obj\stm32f3_discovery_lsm303dlhc.o
+ .debug_line    0x0000106a      0x7cb ..\obj\stm32f30x_adc.o
+ .debug_line    0x00001835      0x330 ..\obj\stm32f30x_gpio.o
+ .debug_line    0x00001b65      0x201 ..\obj\GPIO_metoder.o
+ .debug_line    0x00001d66      0x1e8 ..\obj\main.o
+ .debug_line    0x00001f4e      0x30c ..\obj\stm32f30x_dma.o
+ .debug_line    0x0000225a       0x68 ..\obj\init.o
+ .debug_line    0x000022c2      0x2bb ..\obj\stm32f30x_exti.o
+ .debug_line    0x0000257d      0x576 ..\obj\stm32f30x_i2c.o
+ .debug_line    0x00002af3      0x27b ..\obj\akselerometer_metoder.o
+ .debug_line    0x00002d6e      0x201 ..\obj\system_stm32f30x_temp.o
+ .debug_line    0x00002f6f      0x261 ..\obj\stm32f30x_misc.o
+ .debug_line    0x000031d0      0xc68 ..\obj\stm32f30x_tim.o
+ .debug_line    0x00003e38       0xa7 ..\obj\startup_stm32f30x.o
+ .debug_line    0x00003edf      0x2c5 ..\obj\stm32f30x_syscfg.o
+ .debug_line    0x000041a4      0x22f ..\obj\SysTick_metoder.o
+ .debug_line    0x000043d3      0x559 ..\obj\stm32f30x_can.o
+ .debug_line    0x0000492c      0x259 ..\obj\TIM_metoder.o
+ .debug_line    0x00004b85      0x37c ..\obj\ADC_metoder.o
+ .debug_line    0x00004f01      0x623 ..\obj\stm32f30x_usart.o
 
-.debug_str      0x00000000     0x4abe
- .debug_str     0x00000000      0x97c ..\obj\UART_metoder.o
+.debug_str      0x00000000     0x4ad6
+ .debug_str     0x00000000      0xb1c ..\obj\rov2016_canbus.o
+                                0xba7 (size before relaxing)
+ .debug_str     0x00000b1c      0x211 ..\obj\UART_metoder.o
                                 0x9ea (size before relaxing)
- .debug_str     0x0000097c      0x635 ..\obj\stm32f30x_rcc.o
+ .debug_str     0x00000d2d      0x635 ..\obj\stm32f30x_rcc.o
                                 0x7fb (size before relaxing)
- .debug_str     0x00000fb1      0x608 ..\obj\stm32f3_discovery_lsm303dlhc.o
+ .debug_str     0x00001362      0x5f5 ..\obj\stm32f3_discovery_lsm303dlhc.o
                                 0x93a (size before relaxing)
- .debug_str     0x000015b9      0x991 ..\obj\stm32f30x_adc.o
+ .debug_str     0x00001957      0x991 ..\obj\stm32f30x_adc.o
                                 0xb97 (size before relaxing)
- .debug_str     0x00001f4a      0x18a ..\obj\stm32f30x_gpio.o
+ .debug_str     0x000022e8      0x18a ..\obj\stm32f30x_gpio.o
                                 0x4a6 (size before relaxing)
- .debug_str     0x000020d4       0x42 ..\obj\GPIO_metoder.o
+ .debug_str     0x00002472       0x42 ..\obj\GPIO_metoder.o
                                 0x33c (size before relaxing)
- .debug_str     0x00002116       0xad ..\obj\main.o
+ .debug_str     0x000024b4       0x97 ..\obj\main.o
                                 0x281 (size before relaxing)
- .debug_str     0x000021c3      0x221 ..\obj\stm32f30x_dma.o
+ .debug_str     0x0000254b      0x221 ..\obj\stm32f30x_dma.o
                                 0x3c4 (size before relaxing)
- .debug_str     0x000023e4       0x30 ..\obj\init.o
+ .debug_str     0x0000276c       0x30 ..\obj\init.o
                                  0xb1 (size before relaxing)
- .debug_str     0x00002414      0x370 ..\obj\can_metoder.o
-                                0xb8f (size before relaxing)
- .debug_str     0x00002784      0x127 ..\obj\stm32f30x_exti.o
+ .debug_str     0x0000279c      0x127 ..\obj\stm32f30x_exti.o
                                 0x387 (size before relaxing)
- .debug_str     0x000028ab      0x3d0 ..\obj\stm32f30x_i2c.o
+ .debug_str     0x000028c3      0x3d0 ..\obj\stm32f30x_i2c.o
                                 0x654 (size before relaxing)
- .debug_str     0x00002c7b       0xdc ..\obj\akselerometer_metoder.o
+ .debug_str     0x00002c93       0xdc ..\obj\akselerometer_metoder.o
                                 0x2c8 (size before relaxing)
- .debug_str     0x00002d57       0xf7 ..\obj\system_stm32f30x_temp.o
+ .debug_str     0x00002d6f       0xf7 ..\obj\system_stm32f30x_temp.o
                                 0x311 (size before relaxing)
- .debug_str     0x00002e4e      0x161 ..\obj\stm32f30x_misc.o
+ .debug_str     0x00002e66      0x161 ..\obj\stm32f30x_misc.o
                                 0x3d5 (size before relaxing)
- .debug_str     0x00002faf      0xd4e ..\obj\stm32f30x_tim.o
+ .debug_str     0x00002fc7      0xd4e ..\obj\stm32f30x_tim.o
                                 0xf7e (size before relaxing)
- .debug_str     0x00003cfd      0x270 ..\obj\stm32f30x_syscfg.o
+ .debug_str     0x00003d15      0x270 ..\obj\stm32f30x_syscfg.o
                                 0x407 (size before relaxing)
- .debug_str     0x00003f6d       0x7e ..\obj\SysTick_metoder.o
+ .debug_str     0x00003f85       0x7e ..\obj\SysTick_metoder.o
                                 0x7dc (size before relaxing)
- .debug_str     0x00003feb      0x307 ..\obj\stm32f30x_can.o
+ .debug_str     0x00004003      0x307 ..\obj\stm32f30x_can.o
                                 0x73b (size before relaxing)
- .debug_str     0x000042f2       0x8e ..\obj\TIM_metoder.o
+ .debug_str     0x0000430a       0x8e ..\obj\TIM_metoder.o
                                 0x51e (size before relaxing)
- .debug_str     0x00004380      0x11e ..\obj\ADC_metoder.o
+ .debug_str     0x00004398      0x11e ..\obj\ADC_metoder.o
                                 0xb23 (size before relaxing)
- .debug_str     0x0000449e      0x620 ..\obj\stm32f30x_usart.o
+ .debug_str     0x000044b6      0x620 ..\obj\stm32f30x_usart.o
                                 0xa06 (size before relaxing)
 
 .comment        0x00000000       0x70
- .comment       0x00000000       0x70 ..\obj\UART_metoder.o
+ .comment       0x00000000       0x70 ..\obj\rov2016_canbus.o
                                  0x71 (size before relaxing)
+ .comment       0x00000000       0x71 ..\obj\UART_metoder.o
  .comment       0x00000000       0x71 ..\obj\stm32f30x_rcc.o
  .comment       0x00000000       0x71 ..\obj\stm32f3_discovery_lsm303dlhc.o
  .comment       0x00000000       0x71 ..\obj\stm32f30x_adc.o
@@ -1627,7 +1628,6 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .comment       0x00000000       0x71 ..\obj\main.o
  .comment       0x00000000       0x71 ..\obj\stm32f30x_dma.o
  .comment       0x00000000       0x71 ..\obj\init.o
- .comment       0x00000000       0x71 ..\obj\can_metoder.o
  .comment       0x00000000       0x71 ..\obj\stm32f30x_exti.o
  .comment       0x00000000       0x71 ..\obj\stm32f30x_i2c.o
  .comment       0x00000000       0x71 ..\obj\akselerometer_metoder.o
@@ -1644,25 +1644,25 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
 .ARM.attributes
                 0x00000000       0x31
  .ARM.attributes
-                0x00000000       0x33 ..\obj\UART_metoder.o
+                0x00000000       0x33 ..\obj\rov2016_canbus.o
  .ARM.attributes
-                0x00000033       0x33 ..\obj\stm32f30x_rcc.o
+                0x00000033       0x33 ..\obj\UART_metoder.o
  .ARM.attributes
-                0x00000066       0x33 ..\obj\stm32f3_discovery_lsm303dlhc.o
+                0x00000066       0x33 ..\obj\stm32f30x_rcc.o
  .ARM.attributes
-                0x00000099       0x33 ..\obj\stm32f30x_adc.o
+                0x00000099       0x33 ..\obj\stm32f3_discovery_lsm303dlhc.o
  .ARM.attributes
-                0x000000cc       0x33 ..\obj\stm32f30x_gpio.o
+                0x000000cc       0x33 ..\obj\stm32f30x_adc.o
  .ARM.attributes
-                0x000000ff       0x33 ..\obj\GPIO_metoder.o
+                0x000000ff       0x33 ..\obj\stm32f30x_gpio.o
  .ARM.attributes
-                0x00000132       0x33 ..\obj\main.o
+                0x00000132       0x33 ..\obj\GPIO_metoder.o
  .ARM.attributes
-                0x00000165       0x33 ..\obj\stm32f30x_dma.o
+                0x00000165       0x33 ..\obj\main.o
  .ARM.attributes
-                0x00000198       0x33 ..\obj\init.o
+                0x00000198       0x33 ..\obj\stm32f30x_dma.o
  .ARM.attributes
-                0x000001cb       0x33 ..\obj\can_metoder.o
+                0x000001cb       0x33 ..\obj\init.o
  .ARM.attributes
                 0x000001fe       0x33 ..\obj\stm32f30x_exti.o
  .ARM.attributes
@@ -1691,16 +1691,16 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
                 0x00000450       0x33 ..\obj\stm32f30x_usart.o
 
 .debug_frame    0x00000000     0x43cc
- .debug_frame   0x00000000       0xb8 ..\obj\UART_metoder.o
- .debug_frame   0x000000b8      0x60c ..\obj\stm32f30x_rcc.o
- .debug_frame   0x000006c4      0x270 ..\obj\stm32f3_discovery_lsm303dlhc.o
- .debug_frame   0x00000934      0x9e4 ..\obj\stm32f30x_adc.o
- .debug_frame   0x00001318      0x214 ..\obj\stm32f30x_gpio.o
- .debug_frame   0x0000152c       0x34 ..\obj\GPIO_metoder.o
- .debug_frame   0x00001560       0x2c ..\obj\main.o
- .debug_frame   0x0000158c      0x1c8 ..\obj\stm32f30x_dma.o
- .debug_frame   0x00001754       0x2c ..\obj\init.o
- .debug_frame   0x00001780      0x108 ..\obj\can_metoder.o
+ .debug_frame   0x00000000      0x108 ..\obj\rov2016_canbus.o
+ .debug_frame   0x00000108       0xb8 ..\obj\UART_metoder.o
+ .debug_frame   0x000001c0      0x60c ..\obj\stm32f30x_rcc.o
+ .debug_frame   0x000007cc      0x270 ..\obj\stm32f3_discovery_lsm303dlhc.o
+ .debug_frame   0x00000a3c      0x9e4 ..\obj\stm32f30x_adc.o
+ .debug_frame   0x00001420      0x214 ..\obj\stm32f30x_gpio.o
+ .debug_frame   0x00001634       0x34 ..\obj\GPIO_metoder.o
+ .debug_frame   0x00001668       0x2c ..\obj\main.o
+ .debug_frame   0x00001694      0x1c8 ..\obj\stm32f30x_dma.o
+ .debug_frame   0x0000185c       0x2c ..\obj\init.o
  .debug_frame   0x00001888      0x148 ..\obj\stm32f30x_exti.o
  .debug_frame   0x000019d0      0x69c ..\obj\stm32f30x_i2c.o
  .debug_frame   0x0000206c       0x78 ..\obj\akselerometer_metoder.o
