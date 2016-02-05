@@ -40,17 +40,29 @@ static uint16_t ADC_buffer[6] = {0};
 /* Function definitions ----------------------------------------------------------------*/
 
 /**
- * @brief  	A interrupt request is generated when DMA_Channel1 is finished saving 4
+ * @brief  	A interrupt request is generated when DMA1_Channel1 is finished saving 5
  * 			new ADC-values to memory.
  * @param  	None
  * @retval 	None
  */
-
 void DMA1_Channel1_IRQHandler(){
 	/* Indicate to SysTick that a new set of data is ready */
-	new_values |= 0x0F;
+	new_values |= 0x1F;
 	DMA_ClearITPendingBit(DMA1_IT_TC1);
 	DMA_ClearFlag(DMA1_FLAG_TC1);
+}
+
+/**
+ * @brief  	A interrupt request is generated when DMA2_Channel1 is finished saving 1
+ * 			new ADC-values to memory.
+ * @param  	None
+ * @retval 	None
+ */
+void DMA2_Channel2_IRQHandler(){
+	/* Indicate to SysTick that a new set of data is ready */
+	new_values |= (1u << 5);
+	DMA_ClearITPendingBit(DMA2_IT_TC2);
+	DMA_ClearFlag(DMA2_FLAG_TC2);
 }
 
 /**
@@ -193,7 +205,7 @@ void ADC_init(void){
 	/* Only one channel will be used in ADC4, while 4 will be used in ADC1.
 	 * TIM2_TRGO is mapped to external trigger event 11 for ADC1 and 7 for ADC4.*/
 	ADC_InitStructure.ADC_ExternalTrigConvEvent = ADC_ExternalTrigConvEvent_11;
-	ADC_InitStructure.ADC_NbrOfRegChannel = 4;
+	ADC_InitStructure.ADC_NbrOfRegChannel = 5;
 	ADC_Init(ADC1, &ADC_InitStructure); /* Download settings to ADC1 registers */
 	ADC_InitStructure.ADC_ExternalTrigConvEvent = ADC_ExternalTrigConvEvent_7;
 	ADC_InitStructure.ADC_NbrOfRegChannel = 1;
@@ -245,6 +257,8 @@ void ADC_init(void){
 
 
 	/* DMA Controller setup *************************************************************/
+
+	/* DMA1 Channel 1, connected to ADC1. */
 	DMA_DeInit(DMA1_Channel1);
 	DMA1_Channel1->CPAR = ((uint32_t)&(ADC1->DR)); 	// Source register (periph)
 	DMA1_Channel1->CMAR = (uint32_t)&ADC_buffer[0]; // Destination register (memory)
@@ -255,18 +269,33 @@ void ADC_init(void){
 						|(DMA_CCR_MINC) 	// Memory pointer automatic increment enabled.
 						|(DMA_CCR_PSIZE_0) 	// Periph. data size = 16 bit.
 						|(DMA_CCR_MSIZE_0) 	// Memory data size = 16 bit.
-						|(DMA_CCR_TCIE)		// Enable interrupt on Transfer Complete
-							;
+						|(DMA_CCR_TCIE);	// Enable interrupt on Transfer Complete
 	//DMA1_Channel1->CCR |= 0b010010110100010;
 
-	/* Activating the DMA channel */
+	/* DMA2 Channel 2, connected to ADC1. */
+	DMA_DeInit(DMA2_Channel2);
+	DMA2_Channel2->CPAR = ((uint32_t)&(ADC4->DR)); 	// Source register (periph)
+	DMA2_Channel2->CMAR = (uint32_t)&ADC_buffer[5]; // Destination register (memory)
+	DMA2_Channel2->CNDTR = 1; 						// The number of data to be transfered
+
+	DMA2_Channel2->CCR = (DMA_CCR_PL_1) 	// Medium priority.
+						|(DMA_CCR_CIRC) 	// DMA Circular mode enabled
+						|(DMA_CCR_MINC) 	// Memory pointer automatic increment enabled.
+						|(DMA_CCR_PSIZE_0) 	// Periph. data size = 16 bit.
+						|(DMA_CCR_MSIZE_0) 	// Memory data size = 16 bit.
+						|(DMA_CCR_TCIE);	// Enable interrupt on Transfer Complete
+
+	/* Activating the DMA channels */
 	DMA1_Channel1->CCR |= DMA_CCR_EN;
+	DMA2_Channel2->CCR |= DMA_CCR_EN;
 
 	/* Enable DMA interrup handler */
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel1_IRQn;
+	NVIC_Init(&NVIC_InitStruct);
+	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel2_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
 	/* Enable DMA request from ADC1 and ADC4 */
@@ -287,10 +316,11 @@ void ADC_init(void){
  * 				BIT:	PIN:		CHANNEL:		DESCRIPTION			TRIGGER:
  *				----------------------------------------------------------------
  *				0		PB12		ADC4_IN3		AN_IN1				TIM2
- *				1		PC0			ADC12_IN6		LEAKAGE DETECTION
- *				2		PC1			ADC12_IN7		AN_IN2
- *				3		PC2			ADC12_IN8		CUR_IN1
- *				4		PC3			ADC12_IN9		CUR_IN2
+ *				1		PF4			ADC1_IN5		INT. TEMPERATURE	TIM2
+ *				2		PC0			ADC1_IN6		LEAKAGE DETECTION	TIM2
+ *				3		PC1			ADC1_IN7		AN_IN2				TIM2
+ *				4		PC2			ADC1_IN8		CUR_IN1				TIM2
+ *				5		PC3			ADC1_IN9		CUR_IN2				TIM2
  *				----------------------------------------------------------------
  */
 uint8_t getValues(void){
@@ -302,7 +332,7 @@ uint8_t getValues(void){
  * @param  	None
  * @retval 	The voltage of the selected channel in 100 uV.
  */
-uint16_t ADC1_getChannel(uint8_t channel){
+uint16_t ADC_getChannel(uint8_t channel){
 	if (channel > 5) return 0;
 	new_values &= ~(1u << channel);
 	return ADC_buffer[channel];

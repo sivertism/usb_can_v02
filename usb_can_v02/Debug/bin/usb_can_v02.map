@@ -838,7 +838,7 @@ Discarded input sections
  .data          0x00000000        0x0 ..\obj\ADC_metoder.o
  .text.getValues
                 0x00000000       0x18 ..\obj\ADC_metoder.o
- .text.ADC1_getChannel
+ .text.ADC_getChannel
                 0x00000000       0x4c ..\obj\ADC_metoder.o
  .text          0x00000000        0x0 ..\obj\stm32f30x_usart.o
  .data          0x00000000        0x0 ..\obj\stm32f30x_usart.o
@@ -940,7 +940,7 @@ Linker script and memory map
 
                 0x2000a000                _eram = 0x2000a000
 
-.text           0x08000000     0x2fab
+.text           0x08000000     0x3017
  *(.isr_vector)
  .isr_vector    0x08000000      0x188 ..\obj\startup_stm32f30x.o
                 0x08000000                g_pfnVectors
@@ -1130,7 +1130,6 @@ Linker script and memory map
                 0x08002080                SPI1_IRQHandler
                 0x08002080                TIM6_DAC_IRQHandler
                 0x08002080                TIM8_UP_IRQHandler
-                0x08002080                DMA2_Channel2_IRQHandler
                 0x08002080                DMA1_Channel4_IRQHandler
                 0x08002080                USART3_IRQHandler
                 0x08002080                DMA1_Channel7_IRQHandler
@@ -1216,36 +1215,39 @@ Linker script and memory map
  .text.DMA1_Channel1_IRQHandler
                 0x08002818       0x24 ..\obj\ADC_metoder.o
                 0x08002818                DMA1_Channel1_IRQHandler
+ .text.DMA2_Channel2_IRQHandler
+                0x0800283c       0x28 ..\obj\ADC_metoder.o
+                0x0800283c                DMA2_Channel2_IRQHandler
  .text.ADC1_2_IRQHandler
-                0x0800283c       0xf4 ..\obj\ADC_metoder.o
-                0x0800283c                ADC1_2_IRQHandler
+                0x08002864       0xf4 ..\obj\ADC_metoder.o
+                0x08002864                ADC1_2_IRQHandler
  .text.ADC4_IRQHandler
-                0x08002930       0x6c ..\obj\ADC_metoder.o
-                0x08002930                ADC4_IRQHandler
+                0x08002958       0x6c ..\obj\ADC_metoder.o
+                0x08002958                ADC4_IRQHandler
  .text.ADC_init
-                0x0800299c      0x2a0 ..\obj\ADC_metoder.o
-                0x0800299c                ADC_init
+                0x080029c4      0x2e4 ..\obj\ADC_metoder.o
+                0x080029c4                ADC_init
  .text.USART_Init
-                0x08002c3c      0x174 ..\obj\stm32f30x_usart.o
-                0x08002c3c                USART_Init
+                0x08002ca8      0x174 ..\obj\stm32f30x_usart.o
+                0x08002ca8                USART_Init
  .text.USART_ClockInit
-                0x08002db0       0x48 ..\obj\stm32f30x_usart.o
-                0x08002db0                USART_ClockInit
+                0x08002e1c       0x48 ..\obj\stm32f30x_usart.o
+                0x08002e1c                USART_ClockInit
  .text.USART_ClockStructInit
-                0x08002df8       0x2c ..\obj\stm32f30x_usart.o
-                0x08002df8                USART_ClockStructInit
+                0x08002e64       0x2c ..\obj\stm32f30x_usart.o
+                0x08002e64                USART_ClockStructInit
  .text.USART_Cmd
-                0x08002e24       0x38 ..\obj\stm32f30x_usart.o
-                0x08002e24                USART_Cmd
+                0x08002e90       0x38 ..\obj\stm32f30x_usart.o
+                0x08002e90                USART_Cmd
  .text.USART_ReceiveData
-                0x08002e5c       0x20 ..\obj\stm32f30x_usart.o
-                0x08002e5c                USART_ReceiveData
+                0x08002ec8       0x20 ..\obj\stm32f30x_usart.o
+                0x08002ec8                USART_ReceiveData
  .text.USART_ITConfig
-                0x08002e7c       0x84 ..\obj\stm32f30x_usart.o
-                0x08002e7c                USART_ITConfig
+                0x08002ee8       0x84 ..\obj\stm32f30x_usart.o
+                0x08002ee8                USART_ITConfig
  .text.USART_GetITStatus
-                0x08002f00       0xa0 ..\obj\stm32f30x_usart.o
-                0x08002f00                USART_GetITStatus
+                0x08002f6c       0xa0 ..\obj\stm32f30x_usart.o
+                0x08002f6c                USART_GetITStatus
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -1259,49 +1261,49 @@ Linker script and memory map
  *(SORT(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x08002fa0        0xb ..\obj\main.o
-                0x08002fa0                ACC_AXIS_X
-                0x08002fa1                ACC_AXIS_Y
-                0x08002fa2                ACC_AXIS_Z
-                0x08002fa3                MAIN_LOOP_LED
-                0x08002fa4                SYSTICK_LED
-                0x08002fa5                CAN_RX_LED
-                0x08002fa6                CAN_TX_LED
-                0x08002fa7                UART_RX_LED
-                0x08002fa8                UART_TX_LED
-                0x08002fa9                STATUS_LED6
-                0x08002faa                STATUS_LED7
+ .rodata        0x0800300c        0xb ..\obj\main.o
+                0x0800300c                ACC_AXIS_X
+                0x0800300d                ACC_AXIS_Y
+                0x0800300e                ACC_AXIS_Z
+                0x0800300f                MAIN_LOOP_LED
+                0x08003010                SYSTICK_LED
+                0x08003011                CAN_RX_LED
+                0x08003012                CAN_TX_LED
+                0x08003013                UART_RX_LED
+                0x08003014                UART_TX_LED
+                0x08003015                STATUS_LED6
+                0x08003016                STATUS_LED7
  *(.eh_fram e*)
 
-.glue_7         0x08002fac        0x0
+.glue_7         0x08003018        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x08002fac        0x0
+.glue_7t        0x08003018        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x08002fac        0x0
+.vfp11_veneer   0x08003018        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x08002fac        0x0
+.v4_bx          0x08003018        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x08002fac        0x0
+.iplt           0x08003018        0x0
  .iplt          0x00000000        0x0 ..\obj\rov2016_canbus.o
 
-.rel.dyn        0x08002fac        0x0
+.rel.dyn        0x08003018        0x0
  .rel.iplt      0x00000000        0x0 ..\obj\rov2016_canbus.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08002fac                __exidx_start = .
+                0x08003018                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x08002fac                __exidx_end = .
-                0x08002fac                __etext = .
-                0x08002fab                _sidata = __etext
+                0x08003018                __exidx_end = .
+                0x08003018                __etext = .
+                0x08003017                _sidata = __etext
 
-.data           0x20000000       0x30 load address 0x08002fab
+.data           0x20000000       0x30 load address 0x08003017
                 0x20000000                __data_start__ = .
                 0x20000000                _sdata = __data_start__
  *(vtable)
@@ -1329,10 +1331,10 @@ Linker script and memory map
                 0x20000030                __data_end__ = .
                 0x20000030                _edata = __data_end__
 
-.igot.plt       0x20000030        0x0 load address 0x08002fdc
+.igot.plt       0x20000030        0x0 load address 0x08003048
  .igot.plt      0x00000000        0x0 ..\obj\rov2016_canbus.o
 
-.bss            0x20000030       0xd4 load address 0x08002fdc
+.bss            0x20000030       0xd4 load address 0x08003048
                 0x20000030                . = ALIGN (0x4)
                 0x20000030                __bss_start__ = .
                 0x20000030                _sbss = __bss_start__
@@ -1368,7 +1370,7 @@ Linker script and memory map
  *(.heap*)
                 0x20000104                __HeapLimit = .
 
-.co_stack       0x20000104        0x4 load address 0x080030b0
+.co_stack       0x20000104        0x4 load address 0x0800311c
                 0x20000108                . = ALIGN (0x8)
  *fill*         0x20000104        0x4 
  *(.co_stack .co_stack.*)
@@ -1409,7 +1411,7 @@ LOAD c:/program files (x86)/gnu tools arm embedded/4.9 2015q2/bin/../lib/gcc/arm
 END GROUP
 OUTPUT(usb_can_v02.elf elf32-littlearm)
 
-.debug_info     0x00000000     0xbe14
+.debug_info     0x00000000     0xbe25
  .debug_info    0x00000000      0xb24 ..\obj\rov2016_canbus.o
  .debug_info    0x00000b24      0x799 ..\obj\UART_metoder.o
  .debug_info    0x000012bd      0xaac ..\obj\stm32f30x_rcc.o
@@ -1431,10 +1433,10 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_info    0x00008b98      0x92d ..\obj\SysTick_metoder.o
  .debug_info    0x000094c5      0xb9c ..\obj\stm32f30x_can.o
  .debug_info    0x0000a061      0x598 ..\obj\TIM_metoder.o
- .debug_info    0x0000a5f9      0x95f ..\obj\ADC_metoder.o
- .debug_info    0x0000af58      0xebc ..\obj\stm32f30x_usart.o
+ .debug_info    0x0000a5f9      0x970 ..\obj\ADC_metoder.o
+ .debug_info    0x0000af69      0xebc ..\obj\stm32f30x_usart.o
 
-.debug_abbrev   0x00000000     0x1e90
+.debug_abbrev   0x00000000     0x1ea6
  .debug_abbrev  0x00000000      0x20f ..\obj\rov2016_canbus.o
  .debug_abbrev  0x0000020f      0x181 ..\obj\UART_metoder.o
  .debug_abbrev  0x00000390      0x1e3 ..\obj\stm32f30x_rcc.o
@@ -1456,10 +1458,10 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_abbrev  0x0000173a      0x15c ..\obj\SysTick_metoder.o
  .debug_abbrev  0x00001896      0x1f3 ..\obj\stm32f30x_can.o
  .debug_abbrev  0x00001a89      0x117 ..\obj\TIM_metoder.o
- .debug_abbrev  0x00001ba0      0x19b ..\obj\ADC_metoder.o
- .debug_abbrev  0x00001d3b      0x155 ..\obj\stm32f30x_usart.o
+ .debug_abbrev  0x00001ba0      0x1b1 ..\obj\ADC_metoder.o
+ .debug_abbrev  0x00001d51      0x155 ..\obj\stm32f30x_usart.o
 
-.debug_aranges  0x00000000      0xfc8
+.debug_aranges  0x00000000      0xfd0
  .debug_aranges
                 0x00000000       0x50 ..\obj\rov2016_canbus.o
  .debug_aranges
@@ -1503,11 +1505,11 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_aranges
                 0x00000da8       0x38 ..\obj\TIM_metoder.o
  .debug_aranges
-                0x00000de0       0x48 ..\obj\ADC_metoder.o
+                0x00000de0       0x50 ..\obj\ADC_metoder.o
  .debug_aranges
-                0x00000e28      0x1a0 ..\obj\stm32f30x_usart.o
+                0x00000e30      0x1a0 ..\obj\stm32f30x_usart.o
 
-.debug_ranges   0x00000000      0xe60
+.debug_ranges   0x00000000      0xe68
  .debug_ranges  0x00000000       0x40 ..\obj\rov2016_canbus.o
  .debug_ranges  0x00000040       0x30 ..\obj\UART_metoder.o
  .debug_ranges  0x00000070      0x140 ..\obj\stm32f30x_rcc.o
@@ -1529,10 +1531,10 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_ranges  0x00000b80       0x20 ..\obj\SysTick_metoder.o
  .debug_ranges  0x00000ba0       0xd0 ..\obj\stm32f30x_can.o
  .debug_ranges  0x00000c70       0x28 ..\obj\TIM_metoder.o
- .debug_ranges  0x00000c98       0x38 ..\obj\ADC_metoder.o
- .debug_ranges  0x00000cd0      0x190 ..\obj\stm32f30x_usart.o
+ .debug_ranges  0x00000c98       0x40 ..\obj\ADC_metoder.o
+ .debug_ranges  0x00000cd8      0x190 ..\obj\stm32f30x_usart.o
 
-.debug_line     0x00000000     0x54f9
+.debug_line     0x00000000     0x5515
  .debug_line    0x00000000      0x364 ..\obj\rov2016_canbus.o
  .debug_line    0x00000364      0x2fa ..\obj\UART_metoder.o
  .debug_line    0x0000065e      0x59e ..\obj\stm32f30x_rcc.o
@@ -1554,10 +1556,10 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_line    0x000041a4      0x22f ..\obj\SysTick_metoder.o
  .debug_line    0x000043d3      0x559 ..\obj\stm32f30x_can.o
  .debug_line    0x0000492c      0x259 ..\obj\TIM_metoder.o
- .debug_line    0x00004b85      0x351 ..\obj\ADC_metoder.o
- .debug_line    0x00004ed6      0x623 ..\obj\stm32f30x_usart.o
+ .debug_line    0x00004b85      0x36d ..\obj\ADC_metoder.o
+ .debug_line    0x00004ef2      0x623 ..\obj\stm32f30x_usart.o
 
-.debug_str      0x00000000     0x4ab7
+.debug_str      0x00000000     0x4acf
  .debug_str     0x00000000      0xb1c ..\obj\rov2016_canbus.o
                                 0xba7 (size before relaxing)
  .debug_str     0x00000b1c      0x211 ..\obj\UART_metoder.o
@@ -1598,9 +1600,9 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
                                 0x73b (size before relaxing)
  .debug_str     0x0000430a       0x8e ..\obj\TIM_metoder.o
                                 0x51e (size before relaxing)
- .debug_str     0x00004398       0xff ..\obj\ADC_metoder.o
-                                0xaf5 (size before relaxing)
- .debug_str     0x00004497      0x620 ..\obj\stm32f30x_usart.o
+ .debug_str     0x00004398      0x117 ..\obj\ADC_metoder.o
+                                0xb0d (size before relaxing)
+ .debug_str     0x000044af      0x620 ..\obj\stm32f30x_usart.o
                                 0xa06 (size before relaxing)
 
 .comment        0x00000000       0x70
@@ -1677,7 +1679,7 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .ARM.attributes
                 0x00000450       0x33 ..\obj\stm32f30x_usart.o
 
-.debug_frame    0x00000000     0x43a4
+.debug_frame    0x00000000     0x43c0
  .debug_frame   0x00000000      0x108 ..\obj\rov2016_canbus.o
  .debug_frame   0x00000108       0xb8 ..\obj\UART_metoder.o
  .debug_frame   0x000001c0      0x60c ..\obj\stm32f30x_rcc.o
@@ -1698,5 +1700,5 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_frame   0x0000362c       0x70 ..\obj\SysTick_metoder.o
  .debug_frame   0x0000369c      0x3f0 ..\obj\stm32f30x_can.o
  .debug_frame   0x00003a8c       0x90 ..\obj\TIM_metoder.o
- .debug_frame   0x00003b1c       0xd8 ..\obj\ADC_metoder.o
- .debug_frame   0x00003bf4      0x7b0 ..\obj\stm32f30x_usart.o
+ .debug_frame   0x00003b1c       0xf4 ..\obj\ADC_metoder.o
+ .debug_frame   0x00003c10      0x7b0 ..\obj\stm32f30x_usart.o
