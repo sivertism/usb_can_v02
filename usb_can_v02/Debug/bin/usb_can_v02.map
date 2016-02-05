@@ -4,7 +4,6 @@ Common symbol       size              file
 
 akselerometer_mottaksbuffer
                     0x6               ..\obj\akselerometer_metoder.o
-ADC4_conv_val       0x2               ..\obj\ADC_metoder.o
 RxMsg               0x14              ..\obj\rov2016_canbus.o
 Rx_Array            0x80              ..\obj\rov2016_canbus.o
 
@@ -1359,18 +1358,13 @@ Linker script and memory map
                 0x20000058                teller
                 0x2000005a                val
                 0x2000005c                valVoltage
- .bss           0x20000060        0xc ..\obj\ADC_metoder.o
-                0x20000060                new_values
-                0x20000061                channel_counter
-                0x20000064                ADC1_buffer
+ .bss           0x20000060        0xe ..\obj\ADC_metoder.o
  *(COMMON)
- COMMON         0x2000006c       0x94 ..\obj\rov2016_canbus.o
-                0x2000006c                RxMsg
-                0x20000080                Rx_Array
- COMMON         0x20000100        0x2 ..\obj\ADC_metoder.o
-                0x20000100                ADC4_conv_val
+ *fill*         0x2000006e        0x2 
+ COMMON         0x20000070       0x94 ..\obj\rov2016_canbus.o
+                0x20000070                RxMsg
+                0x20000084                Rx_Array
                 0x20000104                . = ALIGN (0x4)
- *fill*         0x20000102        0x2 
                 0x20000104                __bss_end__ = .
                 0x20000104                _ebss = __bss_end__
 
@@ -1447,7 +1441,7 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_info    0x0000a5f9      0x9b6 ..\obj\ADC_metoder.o
  .debug_info    0x0000afaf      0xebc ..\obj\stm32f30x_usart.o
 
-.debug_abbrev   0x00000000     0x1ec0
+.debug_abbrev   0x00000000     0x1eaf
  .debug_abbrev  0x00000000      0x20f ..\obj\rov2016_canbus.o
  .debug_abbrev  0x0000020f      0x181 ..\obj\UART_metoder.o
  .debug_abbrev  0x00000390      0x1e3 ..\obj\stm32f30x_rcc.o
@@ -1469,8 +1463,8 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_abbrev  0x0000173a      0x15c ..\obj\SysTick_metoder.o
  .debug_abbrev  0x00001896      0x1f3 ..\obj\stm32f30x_can.o
  .debug_abbrev  0x00001a89      0x117 ..\obj\TIM_metoder.o
- .debug_abbrev  0x00001ba0      0x1cb ..\obj\ADC_metoder.o
- .debug_abbrev  0x00001d6b      0x155 ..\obj\stm32f30x_usart.o
+ .debug_abbrev  0x00001ba0      0x1ba ..\obj\ADC_metoder.o
+ .debug_abbrev  0x00001d5a      0x155 ..\obj\stm32f30x_usart.o
 
 .debug_aranges  0x00000000      0xfd0
  .debug_aranges
@@ -1545,7 +1539,7 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_ranges  0x00000c98       0x40 ..\obj\ADC_metoder.o
  .debug_ranges  0x00000cd8      0x190 ..\obj\stm32f30x_usart.o
 
-.debug_line     0x00000000     0x5524
+.debug_line     0x00000000     0x5513
  .debug_line    0x00000000      0x364 ..\obj\rov2016_canbus.o
  .debug_line    0x00000364      0x2fa ..\obj\UART_metoder.o
  .debug_line    0x0000065e      0x59e ..\obj\stm32f30x_rcc.o
@@ -1567,8 +1561,8 @@ OUTPUT(usb_can_v02.elf elf32-littlearm)
  .debug_line    0x000041a4      0x22f ..\obj\SysTick_metoder.o
  .debug_line    0x000043d3      0x559 ..\obj\stm32f30x_can.o
  .debug_line    0x0000492c      0x259 ..\obj\TIM_metoder.o
- .debug_line    0x00004b85      0x37c ..\obj\ADC_metoder.o
- .debug_line    0x00004f01      0x623 ..\obj\stm32f30x_usart.o
+ .debug_line    0x00004b85      0x36b ..\obj\ADC_metoder.o
+ .debug_line    0x00004ef0      0x623 ..\obj\stm32f30x_usart.o
 
 .debug_str      0x00000000     0x4ad6
  .debug_str     0x00000000      0xb1c ..\obj\rov2016_canbus.o

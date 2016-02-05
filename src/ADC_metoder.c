@@ -22,9 +22,13 @@
 /* Global variables --------------------------------------------------------------------*/
 #include "extern_decl_global_vars.h"
 
+/* Private variables -------------------------------------------------------------------*/
+static uint8_t new_values = 0;
+static uint8_t channel_counter = 0;
+static uint16_t ADC1_buffer[4] = {0};
+static uint16_t ADC4_conv_val;
 
-/* Function declarations ---------------------------------------------------------------*/
-void ADC_init(void);
+/* Private function prototypes ---------------------------------------------------------*/
 void ADC1_2_IRQHandler(void);
 void ADC4_IRQHandler(void);
 void DMA1_Channel1_IRQHandler(void);
@@ -99,18 +103,22 @@ void ADC4_IRQHandler(void){
  *				PIN:		CHANNEL:		DESCRIPTION			TRIGGER:
  *				--------------------------------------------------------
  *				PB12		ADC4_IN3		AN_IN1				TIM2
- *				PC0			ADC1_IN6		LEAKAGE DETECTION
- *				PC1			ADC1_IN7		AN_IN2
- *				PC2			ADC1_IN8		CUR_IN1
- *				PC3			ADC1_IN9		CUR_IN2
+ *				PF4			ADC1_IN5		INT. TEMPERATURE	TIM2
+ *				PC0			ADC1_IN6		LEAKAGE DETECTION	TIM2
+ *				PC1			ADC1_IN7		AN_IN2				TIM2
+ *				PC2			ADC1_IN8		CUR_IN1				TIM2
+ *				PC3			ADC1_IN9		CUR_IN2				TIM2
  *				--------------------------------------------------------
  * @param  None
  * @retval None
  */
 void ADC_init(void){
+
+	/* TypeDef declarations *************************************************************/
 	GPIO_InitTypeDef GPIO_InitStructure;
 	ADC_InitTypeDef ADC_InitStructure;
 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
+	NVIC_InitTypeDef NVIC_InitStruct;
 
 	/* Clock setup **********************************************************************/
 	RCC_ADCCLKConfig(RCC_ADC12PLLCLK_Div4); // Set clock divider
@@ -131,11 +139,13 @@ void ADC_init(void){
 	GPIO_Init(GPIOC, &GPIO_InitStructure); // Download settings to GPIOC registers
 
 	/* Calibration **********************************************************************/
+	/* Reset ADC registers to their default values. */
 	ADC_DeInit(ADC1);
 	ADC_DeInit(ADC4);
 
-	ADC_VoltageRegulatorCmd(ADC1, ENABLE); // Activate voltage regulator
-	ADC_VoltageRegulatorCmd(ADC4, ENABLE); // Activate voltage regulator
+	/* Activate voltage regulators */
+	ADC_VoltageRegulatorCmd(ADC1, ENABLE);
+	ADC_VoltageRegulatorCmd(ADC4, ENABLE);
 
 	/* Wait 10 microseconds for the voltage regulator to finish starting up */
 	volatile uint16_t i = 358; // 10us/(2*14ns) = 358 iterations
@@ -155,7 +165,6 @@ void ADC_init(void){
 	/* Common structure *****************************************************************/
 	ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
 	ADC_CommonInitStructure.ADC_Clock = ADC_Clock_AsynClkMode;
-	// ADC_CommonInitStructure.ADC_Clock = ADC_Clock_SynClkModeDiv2;
 	ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;
 	ADC_CommonInitStructure.ADC_DMAMode = ADC_DMAMode_Circular;
 	ADC_CommonInitStructure.ADC_TwoSamplingDelay = 10;
@@ -163,12 +172,15 @@ void ADC_init(void){
 	ADC_CommonInit(ADC1, &ADC_CommonInitStructure);
 
 	/* ADC setup ************************************************************************/
+	/*
+	 *	Resolution:			12 bit -> 732 uV per LSb.
+	 *	Conversion mode:	Triggered from TIM2_TRGO.
+	 *	DMA:				DMA request enabled for circular DMA mode.
+	 *
+	 */
 
-	ADC_InitStructure.ADC_ContinuousConvMode = ADC_ContinuousConvMode_Disable;
-	/* 12 bit resolution => (3.0-0)/2^12 = 732 uV per LSb  */
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
-
-	/* TIM2 will trigger sampling and converting for all ADC channels. */
+	ADC_InitStructure.ADC_ContinuousConvMode = ADC_ContinuousConvMode_Disable;
 	ADC_InitStructure.ADC_ExternalTrigEventEdge = ADC_ExternalTrigEventEdge_RisingEdge;
 	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
 	ADC_InitStructure.ADC_OverrunMode = ADC_OverrunMode_Enable;
@@ -182,31 +194,40 @@ void ADC_init(void){
 	ADC_InitStructure.ADC_ExternalTrigConvEvent = ADC_ExternalTrigConvEvent_7;
 	ADC_InitStructure.ADC_NbrOfRegChannel = 1;
 	ADC_Init(ADC4, &ADC_InitStructure); /* Download settings to ADC4 registers*/
-
 	ADC1->CFGR |= 0b11; // Making sure DMA access is enabled for ADC1
+
 	/* Interrupt settings ***************************************************************/
+	/*
+	 * No interrupts are used for the ADC modules, the only interrupt will come from
+	 * the DMA module(when all DMA-transfers are complete).
+	 */
 
 	/* Interrupt handler settings */
-	NVIC_InitTypeDef NVIC_InitStruct;
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
-	//NVIC_InitStruct.NVIC_IRQChannel = ADC1_2_IRQn;
-	NVIC_Init(&NVIC_InitStruct);
-	NVIC_InitStruct.NVIC_IRQChannel = ADC4_IRQn;
-	NVIC_Init(&NVIC_InitStruct);
-
-	/* Interrupt request settings */
-	//	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
-	//ADC_ITConfig(ADC1, ADC_IT_EOS, ENABLE);
-	ADC_ITConfig(ADC4, ADC_IT_EOC, ENABLE);
+//	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+//	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+//	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+//	NVIC_InitStruct.NVIC_IRQChannel = ADC1_2_IRQn;
+//	NVIC_Init(&NVIC_InitStruct);
+//	NVIC_InitStruct.NVIC_IRQChannel = ADC4_IRQn;
+//	NVIC_Init(&NVIC_InitStruct);
+//
+//	/* Interrupt request settings */
+//	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+//	ADC_ITConfig(ADC4, ADC_IT_EOC, ENABLE);
 
 	/* ADC Channal sequencing ***********************************************************/
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 1, ADC_SampleTime_181Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_181Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 3, ADC_SampleTime_181Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 4, ADC_SampleTime_181Cycles5);
-	ADC_RegularChannelConfig(ADC4, ADC_Channel_3, 1, ADC_SampleTime_181Cycles5);
+	/*
+	 * ADC1 will sample channels 5-9, ADC4 will sample channel 3.
+	 * See the table over ADC_init() for pin mapping and functions.
+	 * The sampling time is set to 61.5*4(prescaler) = 246 processor cycles to allow
+	 * the DMA to finish data transfers before the next channel is sampled.
+	 */
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_5, 1, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 1, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 3, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 4, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC4, ADC_Channel_3, 1, ADC_SampleTime_61Cycles5);
 
 
 	/* Activaton ************************************************************************/
@@ -220,58 +241,33 @@ void ADC_init(void){
 
 
 	/* DMA Controller setup *************************************************************/
-	//	DMA_InitTypeDef DMA_InitStructure;
-	//	DMA_DeInit(DMA1_Channel1);
-	//	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-	//	DMA_InitStructure.DMA_PeripheralBaseAddr = ((uint32_t)&(ADC1->DR));
-	//	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-	//	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
-	//	DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADC1_buffer[0];
-	//	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-	//	DMA_InitStructure.DMA_BufferSize = 4;
-	//	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-	//	DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-	//	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-	//	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-	//	DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-	//	DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
-	//	DMA_Cmd(DMA1_Channel1, ENABLE);
-
 	DMA_DeInit(DMA1_Channel1);
-	DMA1_Channel1->CPAR = ((uint32_t)&(ADC1->DR)); // Source register (periph)
+	DMA1_Channel1->CPAR = ((uint32_t)&(ADC1->DR)); 	// Source register (periph)
 	DMA1_Channel1->CMAR = (uint32_t)&ADC1_buffer[0]; // Destination register (memory)
-	DMA1_Channel1->CNDTR = 4; // The number of data to be transfered
+	DMA1_Channel1->CNDTR = 5; 						// The number of data to be transfered
 
-	/* Configure data transfer direction, circular mode, peripheral & memory incremented
-	 *	mode, peripheral & memory data size, and interrupt after half and/or full transfer in the
-	 *	DMA_CCRx register.
-	 */
-
-		DMA1_Channel1->CCR = 	(DMA_CCR_PL_1) // Prio 0
-							|	(DMA_CCR_CIRC)
-							|	(DMA_CCR_MINC)
-							|	(DMA_CCR_PSIZE_0)
-							|	(DMA_CCR_MSIZE_0)
-							|	(DMA_CCR_TCIE)
+	DMA1_Channel1->CCR = (DMA_CCR_PL_1) 	// Medium priority.
+						|(DMA_CCR_CIRC) 	// DMA Circular mode enabled
+						|(DMA_CCR_MINC) 	// Memory pointer automatic increment enabled.
+						|(DMA_CCR_PSIZE_0) 	// Periph. data size = 16 bit.
+						|(DMA_CCR_MSIZE_0) 	// Memory data size = 16 bit.
+						|(DMA_CCR_TCIE)		// Enable interrupt on Transfer Complete
 							;
 	//DMA1_Channel1->CCR |= 0b010010110100010;
-
 
 	/* Activating the DMA channel */
 	DMA1_Channel1->CCR |= DMA_CCR_EN;
 
 	/* Enable DMA interrup handler */
-	//	NVIC_InitTypeDef NVIC_InitStruct;
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel1_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
+	/* Enable DMA request from ADC1 and ADC4 */
 	ADC_DMACmd(ADC1, ENABLE);
-
-
-
+	ADC_DMACmd(ADC4, ENABLE);
 
 	/* Start first conversion ***********************************************************/
 	ADC_StartConversion(ADC1);
