@@ -22,11 +22,6 @@
 /* Global variables --------------------------------------------------------------------*/
 #include "extern_decl_global_vars.h"
 
-/* Private variables -------------------------------------------------------------------*/
-static uint8_t new_values = 0;
-static uint8_t channel_counter = 0;
-static uint16_t ADC1_buffer[4] = {0};
-static uint16_t ADC4_conv_val;
 
 /* Private function prototypes ---------------------------------------------------------*/
 void ADC1_2_IRQHandler(void);
@@ -35,6 +30,12 @@ void DMA1_Channel1_IRQHandler(void);
 uint8_t ADC_getValues(void);
 uint16_t ADC1_getChannel(uint8_t channel);
 uint16_t ADC4_getChannel(uint8_t channel);
+
+/* Private variables -------------------------------------------------------------------*/
+static uint8_t new_values = 0;
+static uint8_t channel_counter = 0;
+static uint16_t ADC_buffer[6] = {0};
+
 
 /* Function definitions ----------------------------------------------------------------*/
 
@@ -62,7 +63,7 @@ void DMA1_Channel1_IRQHandler(){
 void ADC1_2_IRQHandler(void){
 	if(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC)){
 		GPIOF->ODR = GPIO_Pin_2;
-		ADC1_buffer[channel_counter] = (30000*ADC_GetConversionValue(ADC1))/4096;
+		ADC_buffer[channel_counter] = (30000*ADC_GetConversionValue(ADC1))/4096;
 		/* Indicate to the main-loop that there is a new measurement available.*/
 		new_values |= (1u << channel_counter);
 		GPIOE->ODR ^= (STATUS_LED6 << 8);
@@ -74,7 +75,6 @@ void ADC1_2_IRQHandler(void){
 	}
 	if(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOS)){
 		GPIOE->ODR ^= (UART_TX_LED << 8);
-		USART_transmit(ADC1_buffer[1]);
 		ADC_ClearFlag(ADC1, ADC_FLAG_EOS);
 	}
 	/* Reset ADC_FLAG_EOC to clear the interrupt request.*/
@@ -87,7 +87,7 @@ void ADC1_2_IRQHandler(void){
  * @retval 	None
  */
 void ADC4_IRQHandler(void){
-	ADC4_conv_val = (30000*ADC_GetConversionValue(ADC4))/4096;
+	ADC_buffer[6] = (30000*ADC_GetConversionValue(ADC4))/4096;
 	/* Indicate to the main-loop that there is a new measurement available.*/
 	new_values |= (1u << 4);
 	GPIOE->ODR ^= (STATUS_LED7 << 8);
@@ -127,6 +127,7 @@ void ADC_init(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_ADC34, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOF, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
 	/* GPIO setup ***********************************************************************/
@@ -137,6 +138,9 @@ void ADC_init(void){
 
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
 	GPIO_Init(GPIOC, &GPIO_InitStructure); // Download settings to GPIOC registers
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+	GPIO_Init(GPIOF, &GPIO_InitStructure);
 
 	/* Calibration **********************************************************************/
 	/* Reset ADC registers to their default values. */
@@ -243,7 +247,7 @@ void ADC_init(void){
 	/* DMA Controller setup *************************************************************/
 	DMA_DeInit(DMA1_Channel1);
 	DMA1_Channel1->CPAR = ((uint32_t)&(ADC1->DR)); 	// Source register (periph)
-	DMA1_Channel1->CMAR = (uint32_t)&ADC1_buffer[0]; // Destination register (memory)
+	DMA1_Channel1->CMAR = (uint32_t)&ADC_buffer[0]; // Destination register (memory)
 	DMA1_Channel1->CNDTR = 5; 						// The number of data to be transfered
 
 	DMA1_Channel1->CCR = (DMA_CCR_PL_1) 	// Medium priority.
@@ -299,18 +303,7 @@ uint8_t getValues(void){
  * @retval 	The voltage of the selected channel in 100 uV.
  */
 uint16_t ADC1_getChannel(uint8_t channel){
-	if (channel > 3) return 0;
+	if (channel > 5) return 0;
 	new_values &= ~(1u << channel);
-	return ADC1_buffer[channel];
-}
-
-/**
- * @brief  	Returns the voltage level of the selected ADC4 channel.
- * @param  	None
- * @retval 	The voltage of the selected channel in 100 uV.
- */
-uint16_t ADC4_getChannel(uint8_t channel){
-	if (channel >= 1) return 0;
-	new_values &= ~(1u << 4);
-	return ADC4_conv_val;
+	return ADC_buffer[channel];
 }
