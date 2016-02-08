@@ -50,6 +50,7 @@ void DMA1_Channel1_IRQHandler(){
 	new_values |= 0x1F;
 	DMA_ClearITPendingBit(DMA1_IT_TC1);
 	DMA_ClearFlag(DMA1_FLAG_TC1);
+	GPIOE->ODR ^= STATUS_LED7 << 8;
 }
 
 /**
@@ -63,6 +64,7 @@ void DMA2_Channel2_IRQHandler(){
 	new_values |= (1u << 5);
 	DMA_ClearITPendingBit(DMA2_IT_TC2);
 	DMA_ClearFlag(DMA2_FLAG_TC2);
+	GPIOE->ODR ^= STATUS_LED6 << 8;
 }
 
 /**
@@ -212,6 +214,7 @@ void ADC_init(void){
 	ADC_InitStructure.ADC_NbrOfRegChannel = 1;
 	ADC_Init(ADC4, &ADC_InitStructure); /* Download settings to ADC4 registers*/
 	ADC1->CFGR |= 0b11; // Making sure DMA access is enabled for ADC1
+	ADC4->CFGR |= 0b11; // Making sure DMA access is enabled for ADC4
 
 	/* Interrupt settings ***************************************************************/
 	/*
@@ -296,7 +299,7 @@ void ADC_init(void){
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel1_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
-	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel2_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannel = DMA2_Channel2_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
 	/* Enable DMA request from ADC1 and ADC4 */

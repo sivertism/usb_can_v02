@@ -81,7 +81,7 @@ void TIM2_init(void){
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
 	/* Time base settings ***********************************************/
-	TIM_TimeBaseStructure.TIM_Period = (1000000/10) - 1; //10 Hz
+	TIM_TimeBaseStructure.TIM_Period = (1000000/10) - 1; //100 Hz
 	TIM_TimeBaseStructure.TIM_Prescaler = 72; // Clocks TIM2 at 1 MHz
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;

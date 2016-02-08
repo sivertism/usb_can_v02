@@ -75,7 +75,16 @@ void SysTick_Handler(void){
 		GPIOE->ODR ^= (1u << CAN_getByteFromMessage(2,0)) << 8;
 	} // end if
 
-
+	if(ADC_getValues() & 0x3F){
+		/* 'G' - AN_IN_1, 'H' - AN_IN_2, 'I' - CUR_IN_1
+		 * 'J' - CUR_IN_2, 'K' - Int_temp, 'L' - leak_det
+		 */
+		USART_datalog_transmit('G', ADC_getChannel(5));
+		USART_datalog_transmit('H', ADC_getChannel(2));
+		USART_datalog_transmit('I', ADC_getChannel(3));
+		USART_datalog_transmit('J', ADC_getChannel(4));
+		USART_timestamp_transmit(timeStamp++);
+	} // end if
 
 	if(teller>100){
 		if ( DMA_GetFlagStatus(DMA1_FLAG_TE1)){
@@ -93,16 +102,6 @@ void SysTick_Handler(void){
 		GPIOE->ODR ^= SYSTICK_LED << 8;
 
 //		accelerometer_readValue();
-		if(ADC_getValues() & 0x3F){
-			/* 'G' - AN_IN_1, 'H' - AN_IN_2, 'I' - CUR_IN_1
-			 * 'J' - CUR_IN_2, 'K' - Int_temp, 'L' - leak_det
-			 */
-			USART_datalog_transmit('G', ADC_getChannel(5));
-			USART_datalog_transmit('H', ADC_getChannel(2));
-			USART_datalog_transmit('I', ADC_getChannel(3));
-			USART_datalog_transmit('J', ADC_getChannel(4));
-			USART_timestamp_transmit(timeStamp++);
-		} // end if
 
 		teller = 0;
 //		CAN_transmitAcceleration(&accelerometer_data);
