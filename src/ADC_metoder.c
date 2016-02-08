@@ -339,5 +339,5 @@ uint8_t ADC_getValues(void){
 uint16_t ADC_getChannel(uint8_t channel){
 	if (channel > 5) return 0;
 	new_values &= ~(1u << channel);
-	return ADC_buffer[channel];
+	return (30000*ADC_buffer[channel])/4096;
 }
