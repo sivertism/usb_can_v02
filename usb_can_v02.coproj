@@ -89,8 +89,8 @@
     <File name="src/SysTick_metoder.c" path="src/SysTick_metoder.c" type="1"/>
     <File name="src/UART_metoder.c" path="src/UART_metoder.c" type="1"/>
     <File name="src/akselerometer_metoder.c" path="src/akselerometer_metoder.c" type="1"/>
-    <File name="cmsis_boot" path="" type="2"/>
     <File name="cmsis_lib/include/stm32f30x_exti.h" path="cmsis_lib/include/stm32f30x_exti.h" type="1"/>
+    <File name="cmsis_boot" path="" type="2"/>
     <File name="src" path="" type="2"/>
     <File name="src/GPIO_metoder.c" path="src/GPIO_metoder.c" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_exti.c" path="cmsis_lib/source/stm32f30x_exti.c" type="1"/>
@@ -99,9 +99,9 @@
     <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
     <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis_lib/include/stm32f30x_dma.h" path="cmsis_lib/include/stm32f30x_dma.h" type="1"/>
+    <File name="cmsis_lib/source/stm32f30x_misc.c" path="cmsis_lib/source/stm32f30x_misc.c" type="1"/>
     <File name="stm32f3_discovery" path="" type="2"/>
     <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
-    <File name="cmsis_lib/source/stm32f30x_misc.c" path="cmsis_lib/source/stm32f30x_misc.c" type="1"/>
     <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
     <File name="cmsis_lib/include/stm32f30x_rcc.h" path="cmsis_lib/include/stm32f30x_rcc.h" type="1"/>
     <File name="cmsis_lib/include/stm32f30x_tim.h" path="cmsis_lib/include/stm32f30x_tim.h" type="1"/>
@@ -114,16 +114,16 @@
     <File name="stm32f3_discovery/stm32f3_discovery_l3gd20.c" path="stm32f3_discovery/stm32f3_discovery_l3gd20.c" type="1"/>
     <File name="src/ADC_metoder.c" path="src/ADC_metoder.c" type="1"/>
     <File name="cmsis_boot/system_stm32f30x.h" path="cmsis_boot/system_stm32f30x.h" type="1"/>
-    <File name="stm32f3_discovery_canbus" path="" type="2"/>
     <File name="stm32f3_discovery/stm32f3_discovery.c" path="stm32f3_discovery/stm32f3_discovery.c" type="1"/>
+    <File name="stm32f3_discovery_canbus" path="" type="2"/>
     <File name="cmsis_lib/source/stm32f30x_adc.c" path="cmsis_lib/source/stm32f30x_adc.c" type="1"/>
     <File name="cmsis_lib/include/stm32f30x_misc.h" path="cmsis_lib/include/stm32f30x_misc.h" type="1"/>
     <File name="cmsis_lib/include/stm32f30x_usart.h" path="cmsis_lib/include/stm32f30x_usart.h" type="1"/>
     <File name="stm32f3_discovery/stm32f3_discovery_lsm303dlhc.c" path="stm32f3_discovery/stm32f3_discovery_lsm303dlhc.c" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_spi.c" path="cmsis_lib/source/stm32f30x_spi.c" type="1"/>
+    <File name="cmsis_boot/stm32f30x.h" path="cmsis_boot/stm32f30x.h" type="1"/>
     <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_syscfg.c" path="cmsis_lib/source/stm32f30x_syscfg.c" type="1"/>
-    <File name="cmsis_boot/stm32f30x.h" path="cmsis_boot/stm32f30x.h" type="1"/>
     <File name="inc/extern_decl_global_vars.h" path="inc/extern_decl_global_vars.h" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_i2c.c" path="cmsis_lib/source/stm32f30x_i2c.c" type="1"/>
     <File name="src/TIM_metoder.c" path="src/TIM_metoder.c" type="1"/>
@@ -136,13 +136,13 @@
     <File name="cmsis_lib/include/stm32f30x_spi.h" path="cmsis_lib/include/stm32f30x_spi.h" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_gpio.c" path="cmsis_lib/source/stm32f30x_gpio.c" type="1"/>
     <File name="cmsis" path="" type="2"/>
-    <File name="inc/ADC_metoder.h" path="inc/ADC_metoder.h" type="1"/>
-    <File name="cmsis_lib" path="" type="2"/>
     <File name="inc/akselerometer_metoder.h" path="inc/akselerometer_metoder.h" type="1"/>
+    <File name="cmsis_lib" path="" type="2"/>
+    <File name="inc/ADC_metoder.h" path="inc/ADC_metoder.h" type="1"/>
     <File name="inc/def_global_vars.h" path="inc/def_global_vars.h" type="1"/>
     <File name="cmsis_lib/source/stm32f30x_can.c" path="cmsis_lib/source/stm32f30x_can.c" type="1"/>
-    <File name="inc/UART_metoder.h" path="inc/UART_metoder.h" type="1"/>
     <File name="stm32f3_discovery/stm32f3_discovery_l3gd20.h" path="stm32f3_discovery/stm32f3_discovery_l3gd20.h" type="1"/>
+    <File name="inc/UART_metoder.h" path="inc/UART_metoder.h" type="1"/>
     <File name="cmsis_lib/include" path="" type="2"/>
     <File name="cmsis_boot/system_stm32f30x_temp.c" path="cmsis_boot/system_stm32f30x_temp.c" type="1"/>
     <File name="stm32f3_discovery_canbus/rov2016_canbus.h" path="stm32f3_discovery_canbus/rov2016_canbus.h" type="1"/>

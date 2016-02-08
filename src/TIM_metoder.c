@@ -52,8 +52,8 @@ void TIM4_init(void){
 	GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_2);
 
 	/* TIM4 settings */
-	TIM_TimeBaseStructure.TIM_Period = 72000000/4000; // 4 kHz
-	TIM_TimeBaseStructure.TIM_Prescaler = 0;
+	TIM_TimeBaseStructure.TIM_Period = 1000000/1000; // 1 kHz
+	TIM_TimeBaseStructure.TIM_Prescaler = 72;
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
 	TIM_TimeBaseInit(TIM4, &TIM_TimeBaseStructure);
@@ -62,7 +62,7 @@ void TIM4_init(void){
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; // PWM modus
 	/* Activate comparison with value located in Capture Compare Register */
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = (72000000/4000)/2; // 50% duty cycle.
+	TIM_OCInitStructure.TIM_Pulse = (1000000/1000)/2; // 50% duty cycle.
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
 	TIM_OC1Init(TIM4, &TIM_OCInitStructure);
 

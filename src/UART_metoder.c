@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    stm32f30x_adc.h
-  * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    23-October-2012
+  * @file    UART_metoder.c
+  * @author  Sivert Sliper and Stian Sørensen
+  * @version V1.0
+  * @date    08-February-2016
   * @brief   This file contains all the functions prototypes for the ADC firmware
   *          library.
   ******************************************************************************
@@ -37,6 +37,8 @@
 void USART_init(void);
 void USART_transmit(uint8_t data);
 void USART2_IRQHandler(void);
+void USART_timestamp_transmit(uint8_t timestamp);
+void USART_datalog_transmit(uint8_t header, uint16_t data);
 
 /* Function definitions ----------------------------------------------------------------*/
 
@@ -115,12 +117,10 @@ void USART_init(void){
 	GPIO_Init(GPIOA, &GPIO_InitStructure_UART);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_7);
 
-
 	/* USART2 Rx (PA3) */
 	GPIO_InitStructure_UART.GPIO_Pin = GPIO_Pin_3;
 	GPIO_Init(GPIOA, &GPIO_InitStructure_UART);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_7);
-
 
 	/* Enable USART2 */
 	USART_Cmd(USART2, ENABLE);
@@ -137,7 +137,6 @@ void USART_transmit(uint8_t data){
 	/* Toggle status LED*/
 	GPIOE->ODR ^= UART_TX_LED << 8;
 
-
 	/* Wait for USART_TX not busy */
 	while(USART_GetFlagStatus(USART2, USART_FLAG_BUSY) != RESET);
 
@@ -147,6 +146,42 @@ void USART_transmit(uint8_t data){
 	/* Wait for transmission complete. */
 	while(USART_GetFlagStatus(USART2, USART_FLAG_TC) == RESET);
 } // end USART_transmit()
+
+/**
+ * @brief  	Transmits one unsigned 16-bit value via serial USB.
+ * 			Used for displaying data on a PC-based logging program.
+ * @param 	header:	Header to indicate the content of the sent data.
+ * @param	data:	A 16-bit value to be transmitted.
+ * @retval None
+ */
+void USART_datalog_transmit(uint8_t header, uint16_t data){
+	/*	1. Transmit header
+	 * 	2. Convert and transmit each hex digit of the data coded in ascii.
+	 * 	3. Transmit timestamp header
+	 * 	4. Transmit timestamp
+	 * 	5. Increment timestamp
+	 */
+
+	USART_transmit(header);
+	//	USART_transmit((uint8_t)data & 0xFF);
+	//	USART_transmit((uint8_t)(data >> 8));
+	USART_transmit((uint8_t)(hex2ascii_table[(data >> 12)])); //(bit 12-15)
+	USART_transmit((uint8_t)(hex2ascii_table[(data >> 8 & 0x000F)])); // 	(bit 8-11)
+	USART_transmit((uint8_t)(hex2ascii_table[(data >> 4 & 0x000F)])); // 	(bit 4-7)
+	USART_transmit((uint8_t)(hex2ascii_table[(data & 0x000F)])); // 		(bit 0-3)
+}
+
+/**
+ * @brief  	Transmits a timestamp for PC-based logging.
+ * @param  None
+ * @retval None
+ */
+
+void USART_timestamp_transmit(uint8_t timestamp){
+	USART_transmit('T');
+	USART_transmit((uint8_t)(hex2ascii_table[(timestamp >> 4 & 0x000F)])); // 	(bit 4-7)
+	USART_transmit((uint8_t)(hex2ascii_table[(timestamp & 0x000F)])); // 		(bit 0-3)
+}
 
 /**
  * @brief  	Returns the number of unread bytes in the emulated UART receive FIFO.
