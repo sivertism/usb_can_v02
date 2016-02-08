@@ -50,6 +50,7 @@ void DMA1_Channel1_IRQHandler(){
 	new_values |= 0x1F;
 	DMA_ClearITPendingBit(DMA1_IT_TC1);
 	DMA_ClearFlag(DMA1_FLAG_TC1);
+	GPIOE->ODR ^= STATUS_LED7 << 8;
 }
 
 /**
@@ -63,6 +64,7 @@ void DMA2_Channel2_IRQHandler(){
 	new_values |= (1u << 5);
 	DMA_ClearITPendingBit(DMA2_IT_TC2);
 	DMA_ClearFlag(DMA2_FLAG_TC2);
+	GPIOE->ODR ^= STATUS_LED6 << 8;
 }
 
 /**
@@ -212,6 +214,7 @@ void ADC_init(void){
 	ADC_InitStructure.ADC_NbrOfRegChannel = 1;
 	ADC_Init(ADC4, &ADC_InitStructure); /* Download settings to ADC4 registers*/
 	ADC1->CFGR |= 0b11; // Making sure DMA access is enabled for ADC1
+	ADC4->CFGR |= 0b11; // Making sure DMA access is enabled for ADC4
 
 	/* Interrupt settings ***************************************************************/
 	/*
@@ -240,10 +243,10 @@ void ADC_init(void){
 	 * the DMA to finish data transfers before the next channel is sampled.
 	 */
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_5, 1, ADC_SampleTime_61Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 1, ADC_SampleTime_61Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 2, ADC_SampleTime_61Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 3, ADC_SampleTime_61Cycles5);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 4, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 2, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_7, 3, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_8, 4, ADC_SampleTime_61Cycles5);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_9, 5, ADC_SampleTime_61Cycles5);
 	ADC_RegularChannelConfig(ADC4, ADC_Channel_3, 1, ADC_SampleTime_61Cycles5);
 
 
@@ -296,7 +299,7 @@ void ADC_init(void){
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel1_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
-	NVIC_InitStruct.NVIC_IRQChannel = DMA1_Channel2_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannel = DMA2_Channel2_IRQn;
 	NVIC_Init(&NVIC_InitStruct);
 
 	/* Enable DMA request from ADC1 and ADC4 */
@@ -324,7 +327,7 @@ void ADC_init(void){
  *				5		PC3			ADC1_IN9		CUR_IN2				TIM2
  *				----------------------------------------------------------------
  */
-uint8_t getValues(void){
+uint8_t ADC_getValues(void){
 	return new_values;
 }
 
@@ -336,5 +339,5 @@ uint8_t getValues(void){
 uint16_t ADC_getChannel(uint8_t channel){
 	if (channel > 5) return 0;
 	new_values &= ~(1u << channel);
-	return ADC_buffer[channel];
+	return (30000*ADC_buffer[channel])/4096;
 }

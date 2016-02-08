@@ -1,27 +1,11 @@
 /**
   ******************************************************************************
-  * @file    stm32f30x_adc.h
-  * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    23-October-2012
-  * @brief   This file contains all the functions prototypes for the ADC firmware
-  *          library.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  * @file    SysTick_metoder.c
+  * @author  Sivert Sliper and Stian Sørensen
+  * @version V1.0
+  * @date    08-February-2016
+  * @brief   This file contains all the functions prototypes for the SysTick
+  *          timer.
   *
   ******************************************************************************
   */
@@ -48,6 +32,11 @@ void CAN_transmitByte(uint16_t StdId, uint8_t data);
 void accelerometer_readValue(void);
 int16_t accelerometer_getData(uint8_t axis);
 void CAN_transmit_AN_RAW(void);
+
+void USART_timestamp_transmit(uint8_t timestamp);
+void USART_datalog_transmit(uint8_t header, uint16_t data);
+uint8_t ADC_getValues(void);
+uint16_t ADC_getChannel(uint8_t channel);
 /* Function definitions ----------------------------------------------------------------*/
 
 /**
@@ -58,7 +47,7 @@ void CAN_transmit_AN_RAW(void);
 void SysTick_init(void) {
 	NVIC_SetPriority(SysTick_IRQn, 1);
 	SysTick->CTRL = 0; /* Disable SysTick */
-	SysTick->LOAD = 72000000/1000;  // 10 msek avbruddsintervall.
+	SysTick->LOAD = 72000000/200;  // 10 msek avbruddsintervall.
 	SysTick->VAL = 0;
 	SysTick->CTRL = (SysTick_CTRL_ENABLE_Msk | SysTick_CTRL_TICKINT_Msk
 			| SysTick_CTRL_CLKSOURCE_Msk);
@@ -75,6 +64,7 @@ void SysTick_init(void) {
 uint8_t teller = 0;
 uint16_t val = 0;
 uint32_t valVoltage = 0;
+uint8_t timeStamp = 0;
 
 void SysTick_Handler(void){
 	teller++;
@@ -85,27 +75,23 @@ void SysTick_Handler(void){
 		GPIOE->ODR ^= (1u << CAN_getByteFromMessage(2,0)) << 8;
 	} // end if
 
+	if(ADC_getValues() == 0x3F){
+		if(timeStamp>=255) timeStamp = 0;
+		/* 'G' - AN_IN_1, 'H' - AN_IN_2, 'I' - CUR_IN_1
+		 * 'J' - CUR_IN_2, 'K' - Int_temp, 'L' - leak_det
+		 */
+		USART_datalog_transmit('G', ADC_getChannel(5));
+		USART_datalog_transmit('H', ADC_getChannel(2));
+		USART_datalog_transmit('I', ADC_getChannel(3));
+		USART_datalog_transmit('J', ADC_getChannel(4));
+		USART_timestamp_transmit(timeStamp++);
 
+	} // end if
 
 	if(teller>100){
-		if ( DMA_GetFlagStatus(DMA1_FLAG_TE1)){
-			GPIOE->ODR ^= 1u << 10 ;
-			DMA_ClearFlag(DMA1_FLAG_TE1);
-		}
-
-		//ADC_StartConversion(ADC1);
-
-		if ((ADC1->ISR & ADC_ISR_OVR) > 0){
-			GPIOE->ODR^= 1u << 11 ;
-			ADC1->ISR &= ADC_ISR_OVR;
-		}
-
 		GPIOE->ODR ^= SYSTICK_LED << 8;
 
 //		accelerometer_readValue();
-
-//		CAN_transmit_AN_RAW();
-//		CAN_transmitByte(0x301, 7);
 
 		teller = 0;
 //		CAN_transmitAcceleration(&accelerometer_data);
